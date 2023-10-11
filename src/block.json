@@ -1,19 +1,15 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "create-block/gutenwatch-video-lightbox",
-	"version": "0.1.0",
+	"apiVersion": 2,
+	"name": "zwt-gvl-blocks/gutenwatch-video-lightbox",
+	"version": "1.0",
 	"title": "Gutenwatch Video Lightbox",
-	"category": "widgets",
+	"category": "zwt-blocks",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": true
 	},
-	"textdomain": "gutenwatch-video-lightbox",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js"
+	"textdomain": "gutenwatch-video-lightbox"
 }

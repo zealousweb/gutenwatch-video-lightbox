@@ -19,21 +19,20 @@ import './style.scss';
  */
 import Edit from './edit';
 import save from './save';
-import metadata from './block.json';
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
-
-	/**
-	 * @see ./save.js
-	 */
-	save,
+registerBlockType( 'zwt-gvl-blocks/gutenwatch-video-lightbox', {
+	apiVersion: 2,
+	title: __( 'Video Lightbox', 'gutenwatch-video-lightbox' ),
+	description: __( 'Slider with Image and Text which you can use for Testimonials slider.', 'gutenwatch-video-lightbox' ),
+	icon: 'format-quote',
+	category: 'zwt-blocks',
+	example: {},
+	supports: {
+		align: true,
+	}
 } );
