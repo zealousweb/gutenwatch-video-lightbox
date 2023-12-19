@@ -1,178 +1,104 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/edit.js":
-/*!*********************!*\
-  !*** ./src/edit.js ***!
-  \*********************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ "./src/VideoLightboxBlock.js":
+/*!***********************************!*\
+  !*** ./src/VideoLightboxBlock.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ Edit; }
-/* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
-function Edit() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gutenwatch Video Lightbox – hello from the editor!', 'gutenwatch-video-lightbox'));
-}
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/save.js");
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * Internal dependencies
- */
-
-
-
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('zwt-gvl-blocks/gutenwatch-video-lightbox', {
-  apiVersion: 2,
-  title: __('Video Lightbox', 'gutenwatch-video-lightbox'),
-  description: __('Slider with Image and Text which you can use for Testimonials slider.', 'gutenwatch-video-lightbox'),
-  icon: 'format-quote',
-  category: 'zwt-blocks',
-  example: {},
-  supports: {
-    align: true
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  Button,
+  MediaUpload
+} = wp.editor;
+const {
+  __
+} = wp.i18n;
+const {
+  RadioControl
+} = wp.components;
+registerBlockType('your-plugin/your-block', {
+  title: __('Custom Block with Image Upload'),
+  icon: 'smiley',
+  category: 'common',
+  attributes: {
+    image: {
+      type: 'string',
+      default: null
+    },
+    selection: {
+      type: 'string',
+      default: 'button'
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const onSelectImage = newImage => {
+      setAttributes({
+        image: newImage.sizes.full.url
+      });
+    };
+    const handleSelectionChange = newSelection => {
+      setAttributes({
+        selection: newSelection
+      });
+    };
+    let control = null;
+    if (attributes.selection === 'button') {
+      control = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+        onClick: () => setAttributes({
+          selection: 'media'
+        })
+      }, __('Upload Image'));
+    } else if (attributes.selection === 'media') {
+      control = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaUpload, {
+        onSelect: onSelectImage,
+        type: "image",
+        value: attributes.image,
+        render: ({
+          open
+        }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+          onClick: open
+        }, __('Select Image'))
+      });
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "custom-block"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RadioControl, {
+      label: __('Select Option'),
+      selected: attributes.selection,
+      options: [{
+        label: __('Button'),
+        value: 'button'
+      }, {
+        label: __('Media Upload'),
+        value: 'media'
+      }],
+      onChange: handleSelectionChange
+    }), control, attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: attributes.image,
+      alt: "Uploaded"
+    }));
+  },
+  save: ({
+    attributes
+  }) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: attributes.image,
+      alt: "Uploaded"
+    }));
   }
 });
-
-/***/ }),
-
-/***/ "./src/save.js":
-/*!*********************!*\
-  !*** ./src/save.js ***!
-  \*********************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ save; }
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-
-
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {Element} Element to render.
- */
-function save() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Gutenwatch Video Lightbox – hello from the saved content!');
-}
-
-/***/ }),
-
-/***/ "./src/editor.scss":
-/*!*************************!*\
-  !*** ./src/editor.scss ***!
-  \*************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/style.scss":
-/*!************************!*\
-  !*** ./src/style.scss ***!
-  \************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
 
 /***/ }),
 
@@ -180,19 +106,9 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************!*\
   !*** external "React" ***!
   \************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 module.exports = window["React"];
-
-/***/ }),
-
-/***/ "@wordpress/block-editor":
-/*!*************************************!*\
-  !*** external ["wp","blockEditor"] ***!
-  \*************************************/
-/***/ (function(module) {
-
-module.exports = window["wp"]["blockEditor"];
 
 /***/ }),
 
@@ -200,9 +116,29 @@ module.exports = window["wp"]["blockEditor"];
 /*!********************************!*\
   !*** external ["wp","blocks"] ***!
   \********************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/editor":
+/*!********************************!*\
+  !*** external ["wp","editor"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["editor"];
 
 /***/ }),
 
@@ -210,7 +146,7 @@ module.exports = window["wp"]["blocks"];
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
   \******************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 module.exports = window["wp"]["i18n"];
 
@@ -242,148 +178,328 @@ module.exports = window["wp"]["i18n"];
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	!function() {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = function(result, chunkIds, fn, priority) {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every(function(key) { return __webpack_require__.O[key](chunkIds[j]); })) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	}();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
+/******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 		__webpack_require__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	!function() {
-/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ 	}();
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	!function() {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"index": 0,
-/******/ 			"./style-index": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = function(chunkId) { return installedChunks[chunkId] === 0; };
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = function(parentChunkLoadingFunction, data) {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some(function(id) { return installedChunks[id] !== 0; })) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkgutenwatch_video_lightbox"] = self["webpackChunkgutenwatch_video_lightbox"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-index"], function() { return __webpack_require__("./src/index.js"); })
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _VideoLightboxBlock__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./VideoLightboxBlock */ "./src/VideoLightboxBlock.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('my-first-block/video-lightbox', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Video Lightbox'),
+  icon: 'video-alt3',
+  category: 'common',
+  attributes: {
+    image: {
+      type: 'string',
+      default: null
+    },
+    selection: {
+      type: 'string',
+      default: 'button'
+    },
+    buttonText: {
+      type: 'string',
+      default: 'Button Text'
+    },
+    buttonBackgroundColor: {
+      type: 'string',
+      default: '#0073aa'
+    },
+    buttonTextColor: {
+      type: 'string',
+      default: '#ffffff'
+    },
+    imageSize: {
+      type: 'string',
+      default: 'full' // Default image size
+    },
+    additionalSettingsEnabled: {
+      type: 'boolean',
+      default: false
+    },
+    iconImage: {
+      type: 'string',
+      default: null
+    },
+    iconImageSize: {
+      type: 'string',
+      default: '12' // Default icon size in pixels
+    },
+    videoLightboxColor: {
+      type: 'string',
+      default: '#000000' // Default color for video lightbox
+    },
+    videoLightboxOpacity: {
+      type: 'number',
+      default: 0.8 // Default opacity for video lightbox
+    },
+    videoLightboxWidth: {
+      type: 'number',
+      default: 640 // Default width for video lightbox
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const onSelectImage = newImage => {
+      setAttributes({
+        image: newImage.sizes.full.url
+      });
+    };
+    const onSelectIcon = newIcon => {
+      setAttributes({
+        iconImage: newIcon.sizes.full.url
+      });
+    };
+    const handleSelectionChange = newSelection => {
+      setAttributes({
+        selection: newSelection
+      });
+    };
+    const handleTextChange = newText => {
+      setAttributes({
+        buttonText: newText
+      });
+    };
+    const handleBackgroundColorChange = color => {
+      setAttributes({
+        buttonBackgroundColor: color
+      });
+    };
+    const handleTextColorChange = color => {
+      setAttributes({
+        buttonTextColor: color
+      });
+    };
+    const handleImageSizeChange = newSize => {
+      setAttributes({
+        imageSize: newSize
+      });
+    };
+    const handleToggleChange = checked => {
+      setAttributes({
+        additionalSettingsEnabled: checked
+      });
+    };
+    const handleIconSizeChange = newSize => {
+      setAttributes({
+        iconImageSize: newSize
+      });
+    };
+    const handleColorChange = color => {
+      setAttributes({
+        videoLightboxColor: color
+      });
+    };
+    const handleOpacityChange = value => {
+      setAttributes({
+        videoLightboxOpacity: value
+      });
+    };
+    const handleWidthChange = value => {
+      setAttributes({
+        videoLightboxWidth: value
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Option for Video Popup'),
+      selected: attributes.selection,
+      options: [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button'),
+        value: 'button'
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Media Upload'),
+        value: 'media'
+      }],
+      onChange: handleSelectionChange
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Settings')
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Text'),
+      value: attributes.buttonText,
+      onChange: handleTextChange
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Background Color'),
+      colorSettings: [{
+        value: attributes.buttonBackgroundColor,
+        onChange: handleBackgroundColorChange,
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Button Background Color')
+      }]
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Text Color'),
+      colorSettings: [{
+        value: attributes.buttonTextColor,
+        onChange: handleTextColorChange,
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Button Text Color')
+      }]
+    })), attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Media Upload Settings')
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Play Icon'),
+      checked: attributes.additionalSettingsEnabled,
+      onChange: handleToggleChange
+    }), attributes.additionalSettingsEnabled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
+      onSelect: onSelectIcon,
+      type: "image",
+      value: attributes.iconImage,
+      render: ({
+        open
+      }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.IconButton, {
+        icon: "upload",
+        onClick: open,
+        "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upload Icon')
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upload Icon')))
+    }), attributes.iconImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: attributes.iconImage,
+      alt: "Icon Uploaded"
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Icon Size (in pixels)'),
+      value: attributes.iconImageSize,
+      onChange: handleIconSizeChange
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Image Size'),
+      value: attributes.imageSize,
+      options: [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Thumbnail'),
+        value: 'thumbnail'
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Medium'),
+        value: 'medium'
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Large'),
+        value: 'large'
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Full'),
+        value: 'full'
+      }
+      // Add more size options as needed
+      ],
+      onChange: handleImageSizeChange
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Video Lightbox Settings')
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lightbox Color'),
+      colorSettings: [{
+        value: attributes.videoLightboxColor,
+        onChange: handleColorChange,
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Lightbox Color')
+      }]
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lightbox Opacity'),
+      value: attributes.videoLightboxOpacity,
+      onChange: handleOpacityChange,
+      min: 0,
+      max: 1,
+      step: 0.1
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lightbox Width'),
+      value: attributes.videoLightboxWidth,
+      onChange: handleWidthChange,
+      min: 320,
+      max: 1920,
+      step: 10
+    })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "custom-block"
+    }, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      onClick: () => setAttributes({
+        selection: 'media'
+      }),
+      style: {
+        backgroundColor: attributes.buttonBackgroundColor,
+        color: attributes.buttonTextColor
+      }
+    }, attributes.buttonText), attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
+      onSelect: onSelectImage,
+      type: "image",
+      value: attributes.image,
+      render: ({
+        open
+      }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        onClick: open
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upload Image'))
+    }), attributes.image && attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: attributes.image,
+      alt: "Uploaded"
+    })));
+  },
+  save: ({
+    attributes
+  }) => {
+    const {
+      selection,
+      buttonText,
+      buttonBackgroundColor,
+      buttonTextColor
+    } = attributes;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: attributes.image,
+      alt: "Uploaded"
+    }));
+  }
+});
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

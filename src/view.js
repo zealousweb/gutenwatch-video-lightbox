@@ -21,7 +21,5 @@
  */
 
 /* eslint-disable no-console */
-console.log(
-	'Hello World! (from create-block-gutenwatch-video-lightbox block)'
-);
+console.log( 'Hello World! (from create-block-my-first-block block)' );
 /* eslint-enable no-console */

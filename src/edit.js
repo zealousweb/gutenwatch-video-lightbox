@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps } from '@wordpress/block-editor';
-
+import { Button, Modal, TextControl } from '@wordpress/components';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -33,8 +33,8 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			{ __(
-				'Gutenwatch Video Lightbox – hello from the editor!',
-				'gutenwatch-video-lightbox'
+				'My First Block – hello from the editoradmin!',
+				'my-first-block'
 			) }
 		</p>
 	);

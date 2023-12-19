@@ -18,7 +18,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function save() {
 	return (
 		<p { ...useBlockProps.save() }>
-			{ 'Gutenwatch Video Lightbox – hello from the saved content!' }
+			{ 'My First Block – hello from the saved contentfrontend!' }
 		</p>
 	);
 }
