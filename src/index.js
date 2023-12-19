@@ -5,7 +5,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { Button, Modal, TextControl, RadioControl, Panel, PanelBody, SelectControl, ToggleControl, IconButton, RangeControl } from '@wordpress/components';
 import { MediaUpload, InspectorControls, PanelColorSettings } from '@wordpress/editor';
-import VideoLightboxBlock from './VideoLightboxBlock';
+//import VideoLightboxBlock from './VideoLightboxBlock';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -54,7 +54,7 @@ registerBlockType('my-first-block/video-lightbox', {
 		/** Icon Image Size Option Settings in pixels*/
 		iconImageSize: {
             type: 'string',
-            default: '12', // Default icon size in pixels
+            default: '30px', // Default icon size in pixels
         },
 		/** Video Lightbox Background color */
 		videoLightboxColor: {
@@ -70,6 +70,10 @@ registerBlockType('my-first-block/video-lightbox', {
         videoLightboxWidth: {
             type: 'number',
             default: 640, // Default width for video lightbox
+        },
+		videoType: {
+            type: 'string',
+            default: null, // Default video type
         },
     },
 	edit: ({ attributes, setAttributes }) => {
@@ -120,6 +124,14 @@ registerBlockType('my-first-block/video-lightbox', {
         const handleWidthChange = (value) => {
             setAttributes({ videoLightboxWidth: value });
         };
+
+		const handleVideoTypeChange = (newType) => {
+        	setAttributes({ videoType: newType });
+	    };
+
+	    const handleVideoUrlChange = (newUrl) => {
+	        setAttributes({ videoUrl: newUrl });
+	    };
 
 		return (
             <div>
@@ -217,6 +229,43 @@ registerBlockType('my-first-block/video-lightbox', {
                         </PanelBody>
                     )}
 
+					<PanelBody title={__('Video Type Settings')}>
+                        <RadioControl
+                            label={__('Select Video Type')}
+                            selected={attributes.videoType}
+                            options={[
+                                { label: 'Upload Video', value: 'uploadvideo' },
+                                { label: 'Video Url', value: 'videourl' },
+                                // Add more options as needed
+                            ]}
+                            onChange={handleVideoTypeChange}
+                        />
+
+						{attributes.videoType === 'videourl' && (
+	                        <>
+	                            <TextControl
+	                                label={__('Video URL')}
+	                                value={attributes.videoUrl}
+	                                onChange={handleVideoUrlChange}
+	                            />
+							</>
+						)}
+						{attributes.videoType === 'uploadvideo' && (
+	                        <>
+	                            <MediaUpload
+	                                onSelect={(newVideo) => setAttributes({ video: newVideo.url })}
+	                                type="video"
+	                                value={attributes.video}
+	                                render={({ open }) => (
+	                                    <Button onClick={open}>
+	                                        {__('Upload Video')}
+	                                    </Button>
+	                                )}
+	                            />
+	                        </>
+	                    )}
+                    </PanelBody>
+
 					<PanelBody title={__('Video Lightbox Settings')}>
                         <PanelColorSettings
                             title={__('Lightbox Color')}
@@ -283,15 +332,30 @@ registerBlockType('my-first-block/video-lightbox', {
     },
     save: ({ attributes }) => {
 
-		const { selection, buttonText, buttonBackgroundColor, buttonTextColor } = attributes;
+		const { selection, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, iconImage, iconImageSize } = attributes;
+		const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
 
         return (
+
             <div>
 
+				{attributes.selection === 'button' && (
+					<button data-fancybox="video-lightbox"
+						style={{ backgroundColor: buttonBackgroundColor }}
+					>
+					{buttonContent}
+					</button>
+				)}
 
                 {attributes.image && (
-                    <img src={attributes.image} alt="Uploaded" />
+					<a data-fancybox="video-lightbox" href={videoUrl}>
+                    	<img src={attributes.image} alt="Uploaded" />
+						<img style={{ width: iconImageSize }}
+						src={attributes.iconImage} alt="IconImage" />
+
+					</a>
                 )}
+
             </div>
         );
     },

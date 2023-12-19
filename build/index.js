@@ -2,106 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/VideoLightboxBlock.js":
-/*!***********************************!*\
-  !*** ./src/VideoLightboxBlock.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-const {
-  registerBlockType
-} = wp.blocks;
-const {
-  Button,
-  MediaUpload
-} = wp.editor;
-const {
-  __
-} = wp.i18n;
-const {
-  RadioControl
-} = wp.components;
-registerBlockType('your-plugin/your-block', {
-  title: __('Custom Block with Image Upload'),
-  icon: 'smiley',
-  category: 'common',
-  attributes: {
-    image: {
-      type: 'string',
-      default: null
-    },
-    selection: {
-      type: 'string',
-      default: 'button'
-    }
-  },
-  edit: ({
-    attributes,
-    setAttributes
-  }) => {
-    const onSelectImage = newImage => {
-      setAttributes({
-        image: newImage.sizes.full.url
-      });
-    };
-    const handleSelectionChange = newSelection => {
-      setAttributes({
-        selection: newSelection
-      });
-    };
-    let control = null;
-    if (attributes.selection === 'button') {
-      control = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-        onClick: () => setAttributes({
-          selection: 'media'
-        })
-      }, __('Upload Image'));
-    } else if (attributes.selection === 'media') {
-      control = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaUpload, {
-        onSelect: onSelectImage,
-        type: "image",
-        value: attributes.image,
-        render: ({
-          open
-        }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-          onClick: open
-        }, __('Select Image'))
-      });
-    }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "custom-block"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RadioControl, {
-      label: __('Select Option'),
-      selected: attributes.selection,
-      options: [{
-        label: __('Button'),
-        value: 'button'
-      }, {
-        label: __('Media Upload'),
-        value: 'media'
-      }],
-      onChange: handleSelectionChange
-    }), control, attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: attributes.image,
-      alt: "Uploaded"
-    }));
-  },
-  save: ({
-    attributes
-  }) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: attributes.image,
-      alt: "Uploaded"
-    }));
-  }
-});
-
-/***/ }),
-
 /***/ "react":
 /*!************************!*\
   !*** external "React" ***!
@@ -235,20 +135,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _VideoLightboxBlock__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./VideoLightboxBlock */ "./src/VideoLightboxBlock.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+
+/**
+* WordPress dependencies
+* @return void
+*/
 
 
 
+//import VideoLightboxBlock from './VideoLightboxBlock';
 
 
-
+/**
+ * Video Lightbox block registration
+ */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('my-first-block/video-lightbox', {
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Video Lightbox'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Video Lightbox'),
   icon: 'video-alt3',
   category: 'common',
   attributes: {
+    /** Image, Description, and VideoURL */
     image: {
       type: 'string',
       default: null
@@ -273,29 +181,39 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: 'full' // Default image size
     },
+    /** Enable Disable option for PlayIcon */
     additionalSettingsEnabled: {
       type: 'boolean',
       default: false
     },
+    /** Icon Image Upload Option Settings*/
     iconImage: {
       type: 'string',
       default: null
     },
+    /** Icon Image Size Option Settings in pixels*/
     iconImageSize: {
       type: 'string',
-      default: '12' // Default icon size in pixels
+      default: '30px' // Default icon size in pixels
     },
+    /** Video Lightbox Background color */
     videoLightboxColor: {
       type: 'string',
       default: '#000000' // Default color for video lightbox
     },
+    /** Video Lightbox Opacity Option */
     videoLightboxOpacity: {
       type: 'number',
       default: 0.8 // Default opacity for video lightbox
     },
+    /** Video Lightbox width Option */
     videoLightboxWidth: {
       type: 'number',
       default: 640 // Default width for video lightbox
+    },
+    videoType: {
+      type: 'string',
+      default: null // Default video type
     }
   },
   edit: ({
@@ -362,41 +280,51 @@ __webpack_require__.r(__webpack_exports__);
         videoLightboxWidth: value
       });
     };
+    const handleVideoTypeChange = newType => {
+      setAttributes({
+        videoType: newType
+      });
+    };
+    const handleVideoUrlChange = newUrl => {
+      setAttributes({
+        videoUrl: newUrl
+      });
+    };
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Option for Video Popup'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select Option for Video Popup'),
       selected: attributes.selection,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Button'),
         value: 'button'
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Media Upload'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Media Upload'),
         value: 'media'
       }],
       onChange: handleSelectionChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Settings')
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Button Settings')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Text'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Button Text'),
       value: attributes.buttonText,
       onChange: handleTextChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Background Color'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Button Background Color'),
       colorSettings: [{
         value: attributes.buttonBackgroundColor,
         onChange: handleBackgroundColorChange,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Button Background Color')
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select Button Background Color')
       }]
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Button Text Color'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Button Text Color'),
       colorSettings: [{
         value: attributes.buttonTextColor,
         onChange: handleTextColorChange,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Button Text Color')
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select Button Text Color')
       }]
     })), attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Media Upload Settings')
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Media Upload Settings')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Play Icon'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Play Icon'),
       checked: attributes.additionalSettingsEnabled,
       onChange: handleToggleChange
     }), attributes.additionalSettingsEnabled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
@@ -408,52 +336,82 @@ __webpack_require__.r(__webpack_exports__);
       }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.IconButton, {
         icon: "upload",
         onClick: open,
-        "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upload Icon')
-      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upload Icon')))
+        "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Upload Icon')
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Upload Icon')))
     }), attributes.iconImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: attributes.iconImage,
       alt: "Icon Uploaded"
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Icon Size (in pixels)'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Icon Size (in pixels)'),
       value: attributes.iconImageSize,
       onChange: handleIconSizeChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Image Size'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select Image Size'),
       value: attributes.imageSize,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Thumbnail'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Thumbnail'),
         value: 'thumbnail'
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Medium'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Medium'),
         value: 'medium'
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Large'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Large'),
         value: 'large'
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Full'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Full'),
         value: 'full'
       }
       // Add more size options as needed
       ],
       onChange: handleImageSizeChange
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Video Lightbox Settings')
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Video Type Settings')
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select Video Type'),
+      selected: attributes.videoType,
+      options: [{
+        label: 'Upload Video',
+        value: 'uploadvideo'
+      }, {
+        label: 'Video Url',
+        value: 'videourl'
+      }
+      // Add more options as needed
+      ],
+      onChange: handleVideoTypeChange
+    }), attributes.videoType === 'videourl' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Video URL'),
+      value: attributes.videoUrl,
+      onChange: handleVideoUrlChange
+    })), attributes.videoType === 'uploadvideo' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
+      onSelect: newVideo => setAttributes({
+        video: newVideo.url
+      }),
+      type: "video",
+      value: attributes.video,
+      render: ({
+        open
+      }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        onClick: open
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Upload Video'))
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Video Lightbox Settings')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lightbox Color'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Lightbox Color'),
       colorSettings: [{
         value: attributes.videoLightboxColor,
         onChange: handleColorChange,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Lightbox Color')
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select Lightbox Color')
       }]
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lightbox Opacity'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Lightbox Opacity'),
       value: attributes.videoLightboxOpacity,
       onChange: handleOpacityChange,
       min: 0,
       max: 1,
       step: 0.1
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lightbox Width'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Lightbox Width'),
       value: attributes.videoLightboxWidth,
       onChange: handleWidthChange,
       min: 320,
@@ -477,7 +435,7 @@ __webpack_require__.r(__webpack_exports__);
         open
       }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         onClick: open
-      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upload Image'))
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Upload Image'))
     }), attributes.image && attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: attributes.image,
       alt: "Uploaded"
@@ -490,12 +448,31 @@ __webpack_require__.r(__webpack_exports__);
       selection,
       buttonText,
       buttonBackgroundColor,
-      buttonTextColor
+      buttonTextColor,
+      videoType,
+      videoUrl,
+      iconImage,
+      iconImageSize
     } = attributes;
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      "data-fancybox": "video-lightbox",
+      style: {
+        backgroundColor: buttonBackgroundColor
+      }
+    }, buttonContent), attributes.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      "data-fancybox": "video-lightbox",
+      href: videoUrl
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: attributes.image,
       alt: "Uploaded"
-    }));
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      style: {
+        width: iconImageSize
+      },
+      src: attributes.iconImage,
+      alt: "IconImage"
+    })));
   }
 });
 })();
