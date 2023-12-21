@@ -2,11 +2,12 @@
 * WordPress dependencies
 * @return void
 */
+import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { Button, Modal, TextControl, RadioControl, Panel, PanelBody, SelectControl, ToggleControl, IconButton, RangeControl } from '@wordpress/components';
+import { Button, Modal, TextControl, RadioControl, Panel, PanelBody, SelectControl } from '@wordpress/components';
+import { ToggleControl, IconButton, RangeControl } from '@wordpress/components';
 import { MediaUpload, InspectorControls, PanelColorSettings } from '@wordpress/editor';
 //import VideoLightboxBlock from './VideoLightboxBlock';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Video Lightbox block registration
@@ -76,14 +77,53 @@ registerBlockType('my-first-block/video-lightbox', {
             default: null, // Default video type
         },
     },
+
+
+	/**
+	 * Main Editor Structure
+	 * @param {*} props
+	 *
+	 * @returns void
+	 */
 	edit: ({ attributes, setAttributes }) => {
+
+		const { useState } = wp.element;
+		const [errorMessage, setErrorMessage] = useState('');
+		const [errorMessagePlayIcon, setErrorMessagePlayIcon] = useState('');
+		const [errorMessageUploadVideo, setErrorMessageUploadVideo] = useState('');
+
+		/** Constant values to contain default values */
         const onSelectImage = (newImage) => {
-            setAttributes({ image: newImage.sizes.full.url });
+			console.log(newImage.mime);
+
+			if (newImage && (newImage.mime === 'image/jpeg' || newImage.mime === 'image/jpg' || newImage.mime === 'image/png' )) {
+		        setAttributes({ image: newImage.sizes.full.url });
+		        setErrorMessage('');
+		    } else {
+		        setErrorMessage('Invalid file type. Please select a JPG, JPEG or PNG file.');
+		    }
         };
 
+		/** Remove Main Image */
+		const removeImage = () => {
+			setAttributes({ image: '' });
+		};
+
 		const onSelectIcon = (newIcon) => {
-            setAttributes({ iconImage: newIcon.sizes.full.url });
-        };
+		    if (newIcon && (newIcon.mime === 'image/jpeg' || newIcon.mime === 'image/jpg' || newIcon.mime === 'image/png' || newIcon.mime === 'image/svg+xml')) {
+		        setAttributes({ iconImage: newIcon.url });
+		        setErrorMessagePlayIcon('');
+		    } else {
+		        setErrorMessagePlayIcon('Invalid file type. Please select a JPG, PNG, or SVG file.');
+		    }
+		};
+
+		/** Remove Play Icon */
+		const removeIcon = () => {
+		    setAttributes({ iconImage: '' });
+		};
+
+
 
         const handleSelectionChange = (newSelection) => {
             setAttributes({ selection: newSelection });
@@ -133,6 +173,21 @@ registerBlockType('my-first-block/video-lightbox', {
 	        setAttributes({ videoUrl: newUrl });
 	    };
 
+		/** Upload Video **/
+		const onUploadVideo = (newVideo) => {
+		    if ( newVideo && ( newVideo.mime === 'video/mp4' )) {
+		        setAttributes({ video: newVideo.url });
+		        setErrorMessageUploadVideo('');
+		    } else {
+		        setErrorMessageUploadVideo('Invalid file type. Please upload mp4 file.');
+		    }
+		};
+
+		/** Remove Upload Video */
+		const removeVideo = () => {
+		    setAttributes({ video: '' });
+		};
+
 		return (
             <div>
 				<RadioControl
@@ -144,6 +199,7 @@ registerBlockType('my-first-block/video-lightbox', {
 					]}
 					onChange={handleSelectionChange}
 				/>
+
                 <InspectorControls>
 					<Panel>
                     {attributes.selection === 'button' && (
@@ -187,24 +243,32 @@ registerBlockType('my-first-block/video-lightbox', {
 
 							{attributes.additionalSettingsEnabled && (
 								<div>
-                                    <MediaUpload
-                                        onSelect={onSelectIcon}
-                                        type="image"
-                                        value={attributes.iconImage}
-                                        render={({ open }) => (
-											<div>
-						                        <IconButton
-						                            icon="upload"
-						                            onClick={open}
-						                            aria-label={__('Upload Icon')}
-						                        />
-						                        <span>{__('Upload Icon')}</span>
-						                    </div>
-                                        )}
-                                    />
-                                    {attributes.iconImage && (
-                                        <img src={attributes.iconImage} alt="Icon Uploaded" />
-                                    )}
+									{attributes.iconImage ? (
+							            <div>
+							                <img src={attributes.iconImage} alt="Uploaded Icon" />
+							                <Button onClick={removeIcon}>Remove</Button>
+							            </div>
+							        ) : (
+										<MediaUpload
+	                                        onSelect={onSelectIcon}
+	                                        type="image"
+	                                        value={attributes.iconImage}
+											accept="image/jpeg,image/jpg,image/png,image/svg+xml"
+	                                        render={({ open }) => (
+												<div>
+							                        <IconButton
+							                            icon="upload"
+							                            onClick={open}
+							                            aria-label={__('Upload Icon')}
+							                        />
+							                        <span>{__('Upload Icon')}</span>
+							                    </div>
+	                                        )}
+	                                    />
+							        )}
+
+									{errorMessagePlayIcon && <p style={{ color: 'red' }}>{errorMessagePlayIcon}</p>}
+
                                 </div>
                             )}
 
@@ -250,20 +314,36 @@ registerBlockType('my-first-block/video-lightbox', {
 	                            />
 							</>
 						)}
-						{attributes.videoType === 'uploadvideo' && (
-	                        <>
-	                            <MediaUpload
-	                                onSelect={(newVideo) => setAttributes({ video: newVideo.url })}
-	                                type="video"
-	                                value={attributes.video}
-	                                render={({ open }) => (
-	                                    <Button onClick={open}>
-	                                        {__('Upload Video')}
-	                                    </Button>
-	                                )}
-	                            />
-	                        </>
-	                    )}
+
+
+						{ attributes.videoType === 'uploadvideo' && (
+							<>
+							{attributes.video ? (
+
+								<>
+								<video src={attributes.video}></video>
+								<Button onClick={removeVideo}>Remove</Button>
+								</>
+							) : (
+								<>
+								<MediaUpload
+									onSelect={onUploadVideo}
+									type="video"
+									value={attributes.video}
+									render={({ open }) => (
+										<Button onClick={open}>
+											{__('Upload Video')}
+										</Button>
+									)}
+								/>
+								</>
+							)}
+
+							{errorMessageUploadVideo && <p style={{ color: 'red' }}>{errorMessageUploadVideo}</p>}
+
+							</>
+						)}
+
                     </PanelBody>
 
 					<PanelBody title={__('Video Lightbox Settings')}>
@@ -302,7 +382,7 @@ registerBlockType('my-first-block/video-lightbox', {
                 <div className="custom-block">
                     {attributes.selection === 'button' && (
                         <Button
-                            onClick={() => setAttributes({ selection: 'media' })}
+                            onClick={() => setAttributes({ selection: 'button' })}
                             style={{
                                 backgroundColor: attributes.buttonBackgroundColor,
                                 color: attributes.buttonTextColor,
@@ -311,44 +391,68 @@ registerBlockType('my-first-block/video-lightbox', {
                             {attributes.buttonText}
                         </Button>
                     )}
+
                     {attributes.selection === 'media' && (
-                        <MediaUpload
-                            onSelect={onSelectImage}
-                            type="image"
-                            value={attributes.image}
-                            render={({ open }) => (
-                                <Button onClick={open}>
-                                    {__('Upload Image')}
-                                </Button>
-                            )}
-                        />
+						<div>
+
+						{attributes.image ? (
+							<div>
+								<img src={attributes.image} alt="Uploaded Icon" />
+								<Button onClick={removeImage}>Remove</Button>
+							</div>
+						) : (
+							<MediaUpload
+	                            onSelect={onSelectImage}
+	                            type="image"
+	                            value={attributes.image}
+								accept="image/jpeg,image/jpg,image/png"
+	                            render={({ open }) => (
+	                                <Button onClick={open}>
+	                                    {__('Upload Image')}
+	                                </Button>
+	                            )}
+	                        />
+						)}
+
+						{errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+
+						</div>
                     )}
-                    {attributes.image && attributes.selection === 'media' && (
-                        <img src={attributes.image} alt="Uploaded" />
-                    )}
+
                 </div>
             </div>
         );
     },
-    save: ({ attributes }) => {
 
-		const { selection, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, iconImage, iconImageSize } = attributes;
+	/**
+     * Main Save Structure
+     * @param {*} param0
+     * @returns
+     */
+    save: ({ attributes }) => {
+		/** Get constant values contains values to save */
+		const { selection, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize } = attributes;
 		const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
 
         return (
-
-            <div>
+			/** Structure to show for update data */
+            <section>
 
 				{attributes.selection === 'button' && (
-					<button data-fancybox="video-lightbox"
-						style={{ backgroundColor: buttonBackgroundColor }}
-					>
-					{buttonContent}
-					</button>
+					<>
+						<button data-fancybox="video-lightbox"
+							style={{ backgroundColor: buttonBackgroundColor }}
+						>
+						{buttonContent}
+						</button>
+						<div class="hidden" >
+					        <video src={video}></video>
+					    </div>
+					</>
 				)}
 
                 {attributes.image && (
-					<a data-fancybox="video-lightbox" href={videoUrl}>
+					<a data-fancybox="video-lightbox" href={video}>
                     	<img src={attributes.image} alt="Uploaded" />
 						<img style={{ width: iconImageSize }}
 						src={attributes.iconImage} alt="IconImage" />
@@ -356,7 +460,7 @@ registerBlockType('my-first-block/video-lightbox', {
 					</a>
                 )}
 
-            </div>
+            </section>
         );
     },
 });
