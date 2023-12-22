@@ -7,15 +7,14 @@ import { registerBlockType } from '@wordpress/blocks';
 import { Button, Modal, TextControl, RadioControl, Panel, PanelBody, SelectControl } from '@wordpress/components';
 import { ToggleControl, IconButton, RangeControl } from '@wordpress/components';
 import { MediaUpload, InspectorControls, PanelColorSettings } from '@wordpress/editor';
-//import VideoLightboxBlock from './VideoLightboxBlock';
 
 /**
  * Video Lightbox block registration
  */
-registerBlockType('my-first-block/video-lightbox', {
+registerBlockType('video-lightbox-block/video-lightbox', {
 	title: __('Video Lightbox'),
     icon: 'video-alt3',
-    category: 'common',
+    category: 'video-lightbox-for-gutenberg',
     attributes: {
 		/** Image, Description, and VideoURL */
 		image: {
@@ -94,8 +93,6 @@ registerBlockType('my-first-block/video-lightbox', {
 
 		/** Constant values to contain default values */
         const onSelectImage = (newImage) => {
-			console.log(newImage.mime);
-
 			if (newImage && (newImage.mime === 'image/jpeg' || newImage.mime === 'image/jpg' || newImage.mime === 'image/png' )) {
 		        setAttributes({ image: newImage.sizes.full.url });
 		        setErrorMessage('');
@@ -122,8 +119,6 @@ registerBlockType('my-first-block/video-lightbox', {
 		const removeIcon = () => {
 		    setAttributes({ iconImage: '' });
 		};
-
-
 
         const handleSelectionChange = (newSelection) => {
             setAttributes({ selection: newSelection });
@@ -189,7 +184,9 @@ registerBlockType('my-first-block/video-lightbox', {
 		};
 
 		return (
-            <div>
+
+            <div class="">
+
 				<RadioControl
 					label={__('Select Option for Video Popup')}
 					selected={attributes.selection}
@@ -202,6 +199,7 @@ registerBlockType('my-first-block/video-lightbox', {
 
                 <InspectorControls>
 					<Panel>
+
                     {attributes.selection === 'button' && (
                         <PanelBody title={__('Button Settings')}>
                             <TextControl
@@ -231,7 +229,6 @@ registerBlockType('my-first-block/video-lightbox', {
                             />
                         </PanelBody>
                     )}
-
 
                     {attributes.selection === 'media' && (
 						<PanelBody title={__('Media Upload Settings')}>
@@ -315,7 +312,6 @@ registerBlockType('my-first-block/video-lightbox', {
 							</>
 						)}
 
-
 						{ attributes.videoType === 'uploadvideo' && (
 							<>
 							{attributes.video ? (
@@ -378,7 +374,6 @@ registerBlockType('my-first-block/video-lightbox', {
 					</Panel>
                 </InspectorControls>
 
-
                 <div className="custom-block">
                     {attributes.selection === 'button' && (
                         <Button
@@ -433,10 +428,11 @@ registerBlockType('my-first-block/video-lightbox', {
 		/** Get constant values contains values to save */
 		const { selection, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize } = attributes;
 		const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
+		//const videoContent = videoUrl != '' ? videoUrl : video;
 
         return (
 			/** Structure to show for update data */
-            <section>
+            <section class="">
 
 				{attributes.selection === 'button' && (
 					<>
@@ -452,6 +448,7 @@ registerBlockType('my-first-block/video-lightbox', {
 				)}
 
                 {attributes.image && (
+
 					<a data-fancybox="video-lightbox" href={video}>
                     	<img src={attributes.image} alt="Uploaded" />
 						<img style={{ width: iconImageSize }}

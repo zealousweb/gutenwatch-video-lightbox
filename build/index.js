@@ -147,15 +147,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//import VideoLightboxBlock from './VideoLightboxBlock';
 
 /**
  * Video Lightbox block registration
  */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockType)('my-first-block/video-lightbox', {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockType)('video-lightbox-block/video-lightbox', {
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Lightbox'),
   icon: 'video-alt3',
-  category: 'common',
+  category: 'video-lightbox-for-gutenberg',
   attributes: {
     /** Image, Description, and VideoURL */
     image: {
@@ -236,7 +235,6 @@ __webpack_require__.r(__webpack_exports__);
 
     /** Constant values to contain default values */
     const onSelectImage = newImage => {
-      console.log(newImage.mime);
       if (newImage && (newImage.mime === 'image/jpeg' || newImage.mime === 'image/jpg' || newImage.mime === 'image/png')) {
         setAttributes({
           image: newImage.sizes.full.url
@@ -349,7 +347,9 @@ __webpack_require__.r(__webpack_exports__);
         video: ''
       });
     };
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      class: ""
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Option for Video Popup'),
       selected: attributes.selection,
       options: [{
@@ -542,8 +542,12 @@ __webpack_require__.r(__webpack_exports__);
       imageSize
     } = attributes;
     const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
+    //const videoContent = videoUrl != '' ? videoUrl : video;
+
     return /** Structure to show for update data */(
-      (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", null, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
+        class: ""
+      }, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
         "data-fancybox": "video-lightbox",
         style: {
           backgroundColor: buttonBackgroundColor

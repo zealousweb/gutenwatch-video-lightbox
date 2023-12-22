@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       My First Block
+ * Plugin Name:       Video Lightbox for Gutenberg
  * Description:       Example block scaffolded with Create Block tool.
  * Requires at least: 6.1
  * Requires PHP:      7.0
@@ -67,3 +67,29 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
 }
 
 add_action('init', 'Video_Lightbox_For_Gutenberg_Block_init');
+
+
+/**
+ * Undocumented function
+ *
+ * @param array $categories - list of category.
+ *
+ * @return mixed Return description.
+ */
+function VideoLightbox_Plugin_Block_Categories( $categories )
+{
+    if (array_search('video-lightbox-for-gutenberg', array_column($categories, 'slug'), true) === false) {
+        return array_merge(
+            $categories,
+            array(
+                array(
+                    'slug' => 'video-lightbox-for-gutenberg',
+                    'title' => __('ZealBlocks', 'videolightboxforgutenberg'),
+                    'icon' => '',
+                ),
+            )
+        );
+    }
+    return $categories;
+}
+add_action('block_categories_all', 'VideoLightbox_Plugin_Block_Categories', 10, 2);
