@@ -7,6 +7,8 @@ import { registerBlockType } from '@wordpress/blocks';
 import { Button, Modal, TextControl, RadioControl, Panel, PanelBody, SelectControl } from '@wordpress/components';
 import { ToggleControl, IconButton, RangeControl } from '@wordpress/components';
 import { MediaUpload, InspectorControls, PanelColorSettings } from '@wordpress/editor';
+import { select } from '@wordpress/data';
+import React, { useRef } from 'react';
 
 /**
  * Video Lightbox block registration
@@ -19,7 +21,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 		/** Image, Description, and VideoURL */
 		image: {
             type: 'string',
-            default: null,
+            //default: [],
         },
         selection: {
             type: 'string',
@@ -75,6 +77,10 @@ registerBlockType('video-lightbox-block/video-lightbox', {
             type: 'string',
             default: null, // Default video type
         },
+        selectedSize: {
+            type: 'string',
+            default: 'medium',
+        }
     },
 
 
@@ -90,11 +96,15 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 		const [errorMessage, setErrorMessage] = useState('');
 		const [errorMessagePlayIcon, setErrorMessagePlayIcon] = useState('');
 		const [errorMessageUploadVideo, setErrorMessageUploadVideo] = useState('');
+        const { selectedSize } = attributes;
+
+        /** get thumbnail image sizes from wordpress */
+        const imageSizes = select('core/editor').getEditorSettings().imageSizes.map((size) => size.slug);
 
 		/** Constant values to contain default values */
         const onSelectImage = (newImage) => {
 			if (newImage && (newImage.mime === 'image/jpeg' || newImage.mime === 'image/jpg' || newImage.mime === 'image/png' )) {
-		        setAttributes({ image: newImage.sizes.full.url });
+		        setAttributes({ image: newImage });
 		        setErrorMessage('');
 		    } else {
 		        setErrorMessage('Invalid file type. Please select a JPG, JPEG or PNG file.');
@@ -275,7 +285,17 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                 onChange={handleIconSizeChange}
                             />
 
-                            <SelectControl
+                                <SelectControl
+                                    label="Select Image Size"
+                                    value={selectedSize}
+                                    options={imageSizes.map((size) => ({ label: size, value: size }))}
+                                    //onChange={(onSelectImageSize) => setSize(onSelectImageSize)}
+                                    //onChange={handleSizeChange}
+                                    onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
+                                />
+
+                            {/**
+                             * <SelectControl
                                 label={__('Select Image Size')}
                                 value={attributes.imageSize}
                                 options={[
@@ -287,6 +307,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                 ]}
                                 onChange={handleImageSizeChange}
                             />
+                             */}
                         </PanelBody>
                     )}
 
@@ -392,14 +413,14 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 
 						{attributes.image ? (
 							<div>
-								<img src={attributes.image} alt="Uploaded Icon" />
+                                <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} /> 
 								<Button onClick={removeImage}>Remove</Button>
 							</div>
 						) : (
 							<MediaUpload
 	                            onSelect={onSelectImage}
 	                            type="image"
-	                            value={attributes.image}
+                                value={attributes.image && attributes.image.id}
 								accept="image/jpeg,image/jpg,image/png"
 	                            render={({ open }) => (
 	                                <Button onClick={open}>
@@ -428,6 +449,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 		/** Get constant values contains values to save */
 		const { selection, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize } = attributes;
 		const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
+        const {selectedSize} = attributes
 		//const videoContent = videoUrl != '' ? videoUrl : video;
 
         return (
@@ -450,10 +472,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                 {attributes.image && (
 
 					<a data-fancybox="video-lightbox" href={video}>
-                    	<img src={attributes.image} alt="Uploaded" />
-						<img style={{ width: iconImageSize }}
-						src={attributes.iconImage} alt="IconImage" />
-
+                        <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
 					</a>
                 )}
 

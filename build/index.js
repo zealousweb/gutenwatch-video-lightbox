@@ -32,6 +32,16 @@ module.exports = window["wp"]["components"];
 
 /***/ }),
 
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "@wordpress/editor":
 /*!********************************!*\
   !*** external ["wp","editor"] ***!
@@ -137,11 +147,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
 
 /**
 * WordPress dependencies
 * @return void
 */
+
+
 
 
 
@@ -158,8 +172,8 @@ __webpack_require__.r(__webpack_exports__);
   attributes: {
     /** Image, Description, and VideoURL */
     image: {
-      type: 'string',
-      default: null
+      type: 'string'
+      //default: [],
     },
     selection: {
       type: 'string',
@@ -214,6 +228,10 @@ __webpack_require__.r(__webpack_exports__);
     videoType: {
       type: 'string',
       default: null // Default video type
+    },
+    selectedSize: {
+      type: 'string',
+      default: 'medium'
     }
   },
   /**
@@ -232,12 +250,18 @@ __webpack_require__.r(__webpack_exports__);
     const [errorMessage, setErrorMessage] = useState('');
     const [errorMessagePlayIcon, setErrorMessagePlayIcon] = useState('');
     const [errorMessageUploadVideo, setErrorMessageUploadVideo] = useState('');
+    const {
+      selectedSize
+    } = attributes;
+
+    /** get thumbnail image sizes from wordpress */
+    const imageSizes = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.select)('core/editor').getEditorSettings().imageSizes.map(size => size.slug);
 
     /** Constant values to contain default values */
     const onSelectImage = newImage => {
       if (newImage && (newImage.mime === 'image/jpeg' || newImage.mime === 'image/jpg' || newImage.mime === 'image/png')) {
         setAttributes({
-          image: newImage.sizes.full.url
+          image: newImage
         });
         setErrorMessage('');
       } else {
@@ -412,24 +436,18 @@ __webpack_require__.r(__webpack_exports__);
       value: attributes.iconImageSize,
       onChange: handleIconSizeChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Image Size'),
-      value: attributes.imageSize,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Thumbnail'),
-        value: 'thumbnail'
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Medium'),
-        value: 'medium'
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Large'),
-        value: 'large'
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Full'),
-        value: 'full'
-      }
-      // Add more size options as needed
-      ],
-      onChange: handleImageSizeChange
+      label: "Select Image Size",
+      value: selectedSize,
+      options: imageSizes.map(size => ({
+        label: size,
+        value: size
+      }))
+      //onChange={(onSelectImageSize) => setSize(onSelectImageSize)}
+      //onChange={handleSizeChange}
+      ,
+      onChange: newSelectedSize => setAttributes({
+        selectedSize: newSelectedSize
+      })
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Type Settings')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
@@ -500,14 +518,14 @@ __webpack_require__.r(__webpack_exports__);
         color: attributes.buttonTextColor
       }
     }, attributes.buttonText), attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.image ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: attributes.image,
-      alt: "Uploaded Icon"
+      src: attributes.image.sizes[selectedSize].url,
+      alt: attributes.image.alt ? attributes.image.alt : ''
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
       onClick: removeImage
     }, "Remove")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_4__.MediaUpload, {
       onSelect: onSelectImage,
       type: "image",
-      value: attributes.image,
+      value: attributes.image && attributes.image.id,
       accept: "image/jpeg,image/jpg,image/png",
       render: ({
         open
@@ -542,6 +560,9 @@ __webpack_require__.r(__webpack_exports__);
       imageSize
     } = attributes;
     const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
+    const {
+      selectedSize
+    } = attributes;
     //const videoContent = videoUrl != '' ? videoUrl : video;
 
     return /** Structure to show for update data */(
@@ -560,14 +581,8 @@ __webpack_require__.r(__webpack_exports__);
         "data-fancybox": "video-lightbox",
         href: video
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: attributes.image,
-        alt: "Uploaded"
-      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        style: {
-          width: iconImageSize
-        },
-        src: attributes.iconImage,
-        alt: "IconImage"
+        src: attributes.image.sizes[selectedSize].url,
+        alt: attributes.image.alt ? attributes.image.alt : ''
       })))
     );
   }
