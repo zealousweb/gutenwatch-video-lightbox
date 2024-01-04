@@ -5,6 +5,8 @@ var $ = jQuery.noConflict();
 ------------------------------------------------------------------------------*/
 $(() => {
 
+    console.log('tr');
+
 	/** Fancybox bindings for Media Grid */
     Fancybox.bind('[data-fancybox="video-lightbox"]', {
         mainClass: "video-lightbox-fancy",

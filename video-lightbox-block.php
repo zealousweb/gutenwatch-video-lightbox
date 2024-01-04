@@ -13,7 +13,7 @@
  * @package           create-block
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
@@ -21,18 +21,8 @@ if (!defined('VIDEO_LIGHTBOX_VERSION')) {
     define('VIDEO_LIGHTBOX_VERSION', time());
 }
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-function VIdeo_Lightbox_init() {
-	register_block_type( __DIR__ . '/build' );
-}
-add_action( 'init', 'VIdeo_Lightbox_init' );
 
+//require_once GRID_MASONRY_DIR . '/inc/custom-functions.php';
 
 /**
  * Register block assets.
@@ -42,7 +32,7 @@ add_action( 'init', 'VIdeo_Lightbox_init' );
 function Video_Lightbox_For_Gutenberg_Block_init(){
 
     wp_enqueue_script(
-        'fancyapp-lib',
+        'fancyapp-lib-video-lb',
         plugins_url('/assets/js/fancybox.umd.js', __FILE__),
         array('jquery'),
         '5.0.24',
@@ -50,19 +40,22 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
     );
 
     wp_enqueue_style(
-        'fancyapp-css',
+        'fancyapp-css-video-lb',
         plugins_url('/assets/css/fancybox.css', __FILE__),
+        '',
         '5.0.24',
         true
     );
 
 	wp_enqueue_script(
-        'script-custom',
+        'script-custom-video-lb',
         plugins_url('/assets/js/script.js', __FILE__),
-        array('jquery', 'fancyapp-lib'),
+        array('jquery', 'fancyapp-lib-video-lb'),
         VIDEO_LIGHTBOX_VERSION,
         true
     );
+
+    register_block_type( __DIR__ . '/build' );
 
 }
 

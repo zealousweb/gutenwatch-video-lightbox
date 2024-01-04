@@ -290,13 +290,12 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                                 accept="image/jpeg,image/jpg,image/png,image/svg+xml"
                                                 render={({ open }) => (
                                                     <div>
-                                                        <Button>
+                                                        <Button
                                                             icon="upload"
                                                             onClick={open}
-                                                            aria-label={__('Upload Icon')}
+                                                            aria-label={__('Upload Icon')} >
                                                             <span>{__('Upload Icon')}</span>
-                                                        </Button>
-                                                        
+                                                        </Button>                                                        
                                                     </div>
                                                 )}
                                             />
@@ -465,16 +464,15 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                             <MediaUploadCheck>
                                 <MediaUpload
                                     onSelect={(image) => onSelectImage(image)}
-                                    //ref={mediaUploadRef[index]}
-                                    //ref={buttonRef}
                                     allowedTypes={['image']}
                                     value={attributes.image && attributes.image.id}
                                     render={({ open }) => (    
                                         <>
                                             {attributes.image ? (
-                                                <a data-fancybox="video-lightbox" > {/** href={video} */}                                         
+                                                <>                                                                                  
                                                     <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
-                                                </a>
+                                                    <Button onClick={removeImage}>Remove/Replace </Button>
+                                                </>
                                             ) : (
                                                 <Button onClick={open}>
                                                     {__('Upload Image')}
@@ -502,9 +500,20 @@ registerBlockType('video-lightbox-block/video-lightbox', {
      */
     save: function ({ attributes }) {
         /** Get constant values contains values to save */
-        const { selection, image, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize, selectedSize } = attributes;
+        const { selection, image, buttonText, buttonBackgroundColor, videoLightboxWidth, videoLightboxColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize, selectedSize, videoLightboxOpacity } = attributes;
         const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
         //const videoContent = videoUrl != '' ? videoUrl : video;
+
+        const customStyles = `
+      .video-lightbox-fancy .fancybox__backdrop {
+        background: ${videoLightboxColor};
+        opacity: ${videoLightboxOpacity};
+      }
+      .video-lightbox-fancy .fancybox__content {
+        max-width: ${videoLightboxWidth}px;
+      }
+      /* Add more styles as needed */
+    `;
 
         return (
             /** Structure to show for update data */
@@ -531,14 +540,17 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                     </>
                 )}
 
-                {attributes.selection === 'media' && selectedSize && image ? (
-                      
-                        <a data-fancybox="video-lightbox" > {/**href={video} */}
-                            {video}
-                            <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
-                        </a>
-                    
-					
+                {attributes.selection === 'media' && selectedSize && image ? (                      
+                    <a data-fancybox="video-lightbox" href={video} >
+                        
+                        <style>
+                            {customStyles}
+                        </style>
+                        {videoLightboxOpacity}
+                        {videoLightboxWidth}
+                        {videoLightboxColor}
+                        <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
+                    </a>
                 ) : (
                     <span>Please upload image first</span>
                 )}
