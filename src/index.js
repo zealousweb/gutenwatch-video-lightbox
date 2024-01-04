@@ -19,8 +19,8 @@ registerBlockType('video-lightbox-block/video-lightbox', {
     attributes: {
         /** Image, Description, and VideoURL */
         image: {
-            type: 'string',
-            //default: [],
+            type: 'object',
+            default: null,
         },
         selection: {
             type: 'string',
@@ -78,13 +78,13 @@ registerBlockType('video-lightbox-block/video-lightbox', {
         },
         selectedSize: {
             type: 'string',
-            //default: '',
+            default: 'thumbnail',
         },
         videoUrl: {
             type: 'string',
             default: null, // Default video type
         },
-        video: {
+		video: {
             type: 'string',
             default: null, // Default video type
         },
@@ -104,6 +104,8 @@ registerBlockType('video-lightbox-block/video-lightbox', {
         const [errorMessagePlayIcon, setErrorMessagePlayIcon] = useState('');
         const [errorMessageUploadVideo, setErrorMessageUploadVideo] = useState('');
         const { selectedSize } = attributes;
+        const { video } = attributes;
+        const { image } = attributes;
 
         console.log(selectedSize);
 
@@ -114,7 +116,10 @@ registerBlockType('video-lightbox-block/video-lightbox', {
         const onSelectImage = (image) => {
             console.log(image);
             if (image && (image.mime === 'image/jpeg' || image.mime === 'image/jpg' || image.mime === 'image/png')) {
-                setAttributes({ image: image });
+                setAttributes({ 
+                    image: image,
+                    //image_url: image.sizes[selectedSize].url
+                });
                 setErrorMessage('');
             } else {
                 setErrorMessage('Invalid file type. Please select a JPG, JPEG or PNG file.');
@@ -466,20 +471,14 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                     value={attributes.image && attributes.image.id}
                                     render={({ open }) => (    
                                         <>
-                                            {`${selectedSize}ddd`}
-                                            {attributes.image && selectedSize && attributes.image.sizes[selectedSize] && attributes.image.alt ? (
-                                                <>
-                                                {`${selectedSize}rrr`}
-                                                <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
-                                                </>
-                                            ) : (
-                                                attributes.image && selectedSize ? (
+                                            {attributes.image ? (
+                                                <a data-fancybox="video-lightbox" > {/** href={video} */}                                         
                                                     <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
-                                                ) : (
-                                                    <Button onClick={open}>
-                                                        {__('Upload Image')}
-                                                    </Button>
-                                                )
+                                                </a>
+                                            ) : (
+                                                <Button onClick={open}>
+                                                    {__('Upload Image')}
+                                                </Button>
                                             )}
                                         </>
                                     )}
@@ -503,14 +502,22 @@ registerBlockType('video-lightbox-block/video-lightbox', {
      */
     save: function ({ attributes }) {
         /** Get constant values contains values to save */
-        const { selection, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize, selectedSize } = attributes;
+        const { selection, image, buttonText, buttonBackgroundColor, buttonTextColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize, selectedSize } = attributes;
         const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
         //const videoContent = videoUrl != '' ? videoUrl : video;
 
         return (
             /** Structure to show for update data */
-            <section {...useBlockProps.save()}>
-
+            <>
+               {/**
+                *  <ul>
+                    {Object.keys(attributes).map((key) => (
+                        <li key={key}>
+                            <strong>{key}:</strong> {attributes[key]}
+                        </li>
+                    ))}
+                </ul>
+                */}
                 {attributes.selection === 'button' && (
                     <>
                         <button data-fancybox="video-lightbox"
@@ -524,11 +531,16 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                     </>
                 )}
 
-                {attributes.image && selectedSize && (
-					<a data-fancybox="video-lightbox" href={video}>
-                        {video}
-                        <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
-					</a>
+                {attributes.selection === 'media' && selectedSize && image ? (
+                      
+                        <a data-fancybox="video-lightbox" > {/**href={video} */}
+                            {video}
+                            <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
+                        </a>
+                    
+					
+                ) : (
+                    <span>Please upload image first</span>
                 )}
 
                 {/*attributes.image && selectedSize && (
@@ -542,7 +554,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                     </div>
                     )*/}
 
-            </section>
+            </>
         );
     },
 });

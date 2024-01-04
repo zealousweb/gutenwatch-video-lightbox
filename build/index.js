@@ -171,8 +171,8 @@ __webpack_require__.r(__webpack_exports__);
   attributes: {
     /** Image, Description, and VideoURL */
     image: {
-      type: 'string'
-      //default: [],
+      type: 'object',
+      default: null
     },
     selection: {
       type: 'string',
@@ -229,8 +229,8 @@ __webpack_require__.r(__webpack_exports__);
       default: null // Default video type
     },
     selectedSize: {
-      type: 'string'
-      //default: '',
+      type: 'string',
+      default: 'thumbnail'
     },
     videoUrl: {
       type: 'string',
@@ -260,6 +260,12 @@ __webpack_require__.r(__webpack_exports__);
     const {
       selectedSize
     } = attributes;
+    const {
+      video
+    } = attributes;
+    const {
+      image
+    } = attributes;
     console.log(selectedSize);
 
     /** get thumbnail image sizes from wordpress */
@@ -271,6 +277,7 @@ __webpack_require__.r(__webpack_exports__);
       if (image && (image.mime === 'image/jpeg' || image.mime === 'image/jpg' || image.mime === 'image/png')) {
         setAttributes({
           image: image
+          //image_url: image.sizes[selectedSize].url
         });
         setErrorMessage('');
       } else {
@@ -543,13 +550,12 @@ __webpack_require__.r(__webpack_exports__);
       value: attributes.image && attributes.image.id,
       render: ({
         open
-      }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, `${selectedSize}ddd`, attributes.image && selectedSize && attributes.image.sizes[selectedSize] && attributes.image.alt ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, `${selectedSize}rrr`, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, attributes.image ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        "data-fancybox": "video-lightbox"
+      }, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
         src: attributes.image.sizes[selectedSize].url,
         alt: attributes.image.alt ? attributes.image.alt : ''
-      })) : attributes.image && selectedSize ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: attributes.image.sizes[selectedSize].url,
-        alt: attributes.image.alt ? attributes.image.alt : ''
-      }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+      })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
         onClick: open
       }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload Image')))
     })), errorMessage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -569,6 +575,7 @@ __webpack_require__.r(__webpack_exports__);
     /** Get constant values contains values to save */
     const {
       selection,
+      image,
       buttonText,
       buttonBackgroundColor,
       buttonTextColor,
@@ -584,9 +591,7 @@ __webpack_require__.r(__webpack_exports__);
     //const videoContent = videoUrl != '' ? videoUrl : video;
 
     return /** Structure to show for update data */(
-      (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
-        ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save()
-      }, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
         "data-fancybox": "video-lightbox",
         style: {
           backgroundColor: buttonBackgroundColor
@@ -595,13 +600,12 @@ __webpack_require__.r(__webpack_exports__);
         class: "hidden"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
         src: video
-      }))), attributes.image && selectedSize && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        "data-fancybox": "video-lightbox",
-        href: video
-      }, video, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      }))), attributes.selection === 'media' && selectedSize && image ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        "data-fancybox": "video-lightbox"
+      }, " ", video, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
         src: attributes.image.sizes[selectedSize].url,
         alt: attributes.image.alt ? attributes.image.alt : ''
-      })))
+      })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Please upload image first"))
     );
   }
 });
