@@ -78,12 +78,12 @@ add_action('init', 'Video_Lightbox_For_Gutenberg_Block_init');
  */
 function VideoLightbox_Plugin_Block_Categories( $categories )
 {
-    if (array_search('video-lightbox-for-gutenberg', array_column($categories, 'slug'), true) === false) {
+    if (array_search('zealblocks', array_column($categories, 'slug'), true) === false) {
         return array_merge(
             $categories,
             array(
                 array(
-                    'slug' => 'video-lightbox-for-gutenberg',
+                    'slug' => 'zealblocks',
                     'title' => __('ZealBlocks', 'videolightboxforgutenberg'),
                     'icon' => '',
                 ),
