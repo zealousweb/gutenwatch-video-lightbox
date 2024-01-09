@@ -55,6 +55,13 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
         true
     );
 
+    wp_enqueue_style(
+        'front-styles',
+        plugins_url('/build/style-index.css', __FILE__),
+        VIDEO_LIGHTBOX_VERSION,
+        true
+    );
+
     register_block_type( __DIR__ . '/build' );
 
 }
