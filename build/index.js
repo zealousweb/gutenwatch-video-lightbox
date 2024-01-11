@@ -103,14 +103,14 @@ __webpack_require__.r(__webpack_exports__);
       default: false
     },
     /** Icon Image Upload Option Settings*/
-    iconImage: {
+    playIconImage: {
       type: 'string',
       default: null
     },
     /** Icon Image Size Option Settings in pixels*/
-    iconImageSize: {
-      type: 'string',
-      default: '30px' // Default icon size in pixels
+    playIconImageSize: {
+      type: 'number',
+      default: 30 // Default icon size in pixels
     },
     /** Video Lightbox Background color */
     videoLightboxColor: {
@@ -142,6 +142,14 @@ __webpack_require__.r(__webpack_exports__);
     video: {
       type: 'string',
       default: null // Default video type
+    },
+    buttonBorderRadius: {
+      type: 'number',
+      default: 0
+    },
+    videoThumbnailBorderRadius: {
+      type: 'number',
+      default: 0
     }
   },
   /**
@@ -179,9 +187,12 @@ __webpack_require__.r(__webpack_exports__);
       buttonBackgroundColor,
       buttonBackgroundHoverColor,
       buttonTextColor,
-      buttonTextHoverColor
+      buttonTextHoverColor,
+      buttonBorderRadius,
+      videoThumbnailBorderRadius
     } = attributes;
-    console.log(selectedSize);
+
+    //console.log(selectedSize);
 
     /** get thumbnail image sizes from wordpress */
     const imageSizes = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.select)('core/editor').getEditorSettings().imageSizes.map(size => size.slug);
@@ -221,7 +232,7 @@ __webpack_require__.r(__webpack_exports__);
     const onSelectIcon = newIcon => {
       if (newIcon && (newIcon.mime === 'image/jpeg' || newIcon.mime === 'image/jpg' || newIcon.mime === 'image/png' || newIcon.mime === 'image/svg+xml')) {
         setAttributes({
-          iconImage: newIcon.url
+          playIconImage: newIcon.url
         });
         setErrorMessagePlayIcon('');
       } else {
@@ -232,7 +243,7 @@ __webpack_require__.r(__webpack_exports__);
     /** Remove Play Icon */
     const removeIcon = () => {
       setAttributes({
-        iconImage: ''
+        playIconImage: ''
       });
     };
     const handleSelectionChange = newSelection => {
@@ -280,9 +291,19 @@ __webpack_require__.r(__webpack_exports__);
         buttonBorderWidth: value
       });
     };
+    const handleButtonBorderRadius = value => {
+      setAttributes({
+        buttonBorderRadius: value
+      });
+    };
     const handleImageSizeChange = newSize => {
       setAttributes({
         imageSize: newSize
+      });
+    };
+    const handleVideoThumbnailBorderRadius = value => {
+      setAttributes({
+        videoThumbnailBorderRadius: value
       });
     };
     const handleToggleChange = checked => {
@@ -290,9 +311,14 @@ __webpack_require__.r(__webpack_exports__);
         additionalSettingsEnabled: checked
       });
     };
-    const handleIconSizeChange = newSize => {
+    const handlePlayIconSizeChange = newSize => {
       setAttributes({
-        iconImageSize: newSize
+        playIconImageSize: newSize
+      });
+    };
+    const handlePlayIconImageChange = value => {
+      setAttributes({
+        playIconImage: value
       });
     };
     const handleColorChange = color => {
@@ -321,7 +347,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     };
     const validate = newUrl => {
-      console.log(newUrl);
+      //console.log(newUrl);
       setVal(newUrl);
       if (validator_lib_isURL__WEBPACK_IMPORTED_MODULE_9___default()(newUrl)) {
         setErr('Valid URL');
@@ -370,11 +396,16 @@ __webpack_require__.r(__webpack_exports__);
         background-color: ${buttonBackgroundColor};
         color: ${buttonTextColor};
         border: ${buttonBorderWidth}px solid ${buttonBorderColor};
+        border-radius: ${buttonBorderRadius}px !important;
       }
       .button-open-vl:hover {
         background-color: ${buttonBackgroundHoverColor};
         color: ${buttonTextHoverColor};
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor};
+      }
+
+      .video-thumbnail {
+        border-radius: ${videoThumbnailBorderRadius}px;
       }
       /* Add more styles as needed */
     `;
@@ -415,6 +446,13 @@ __webpack_require__.r(__webpack_exports__);
       min: 0,
       max: 2,
       step: 1
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Button Border Radius', 'videolightboxforgutenberg'),
+      value: attributes.buttonBorderRadius,
+      onChange: handleButtonBorderRadius,
+      min: 0,
+      max: 30,
+      step: 2
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Button Design', 'videolightboxforgutenberg'),
       colorSettings: [{
@@ -443,20 +481,20 @@ __webpack_require__.r(__webpack_exports__);
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Hover Color', 'videolightboxforgutenberg')
       }]
     })), attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Media Upload Settings', 'videolightboxforgutenberg')
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Icon Settings', 'videolightboxforgutenberg')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Icon', 'videolightboxforgutenberg'),
       checked: attributes.additionalSettingsEnabled,
       onChange: handleToggleChange
-    }), attributes.additionalSettingsEnabled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.iconImage ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: attributes.iconImage,
+    }), attributes.additionalSettingsEnabled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.playIconImage ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: attributes.playIconImage,
       alt: "Uploaded Icon"
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
       onClick: removeIcon
     }, "Remove")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
       onSelect: onSelectIcon,
       type: "image",
-      value: attributes.iconImage,
+      value: attributes.playIconImage,
       accept: "image/jpeg,image/jpg,image/png,image/svg+xml",
       render: ({
         open
@@ -469,12 +507,17 @@ __webpack_require__.r(__webpack_exports__);
       style: {
         color: 'red'
       }
-    }, errorMessagePlayIcon)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Icon Size (in pixels)', 'videolightboxforgutenberg'),
-      value: attributes.iconImageSize,
-      onChange: handleIconSizeChange
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Image Size', 'videolightboxforgutenberg'),
+    }, errorMessagePlayIcon), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Icon Size', 'videolightboxforgutenberg'),
+      value: attributes.playIconImageSize,
+      onChange: handlePlayIconSizeChange,
+      min: 0,
+      max: 50,
+      step: 2
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Type Settings', 'videolightboxforgutenberg')
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Thumbnail Size', 'videolightboxforgutenberg'),
       value: selectedSize,
       options: imageSizes.map(size => ({
         label: size,
@@ -486,9 +529,7 @@ __webpack_require__.r(__webpack_exports__);
       onChange: newSelectedSize => setAttributes({
         selectedSize: newSelectedSize
       })
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Type Settings', 'videolightboxforgutenberg')
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Video Type', 'videolightboxforgutenberg'),
       selected: attributes.videoType,
       options: [{
@@ -533,6 +574,13 @@ __webpack_require__.r(__webpack_exports__);
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Lightbox Color', 'videolightboxforgutenberg')
       }]
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Thumbnail Border Radius', 'videolightboxforgutenberg'),
+      value: attributes.videoThumbnailBorderRadius,
+      onChange: handleVideoThumbnailBorderRadius,
+      min: 0,
+      max: 30,
+      step: 2
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Lightbox Opacity', 'videolightboxforgutenberg'),
       value: attributes.videoLightboxOpacity,
       onChange: handleOpacityChange,
@@ -544,7 +592,7 @@ __webpack_require__.r(__webpack_exports__);
       value: attributes.videoLightboxWidth,
       onChange: handleWidthChange,
       min: 320,
-      max: 1920,
+      max: 1180,
       step: 10
     })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "media-block"
@@ -634,18 +682,22 @@ __webpack_require__.r(__webpack_exports__);
       videoLightboxColor,
       buttonTextColor,
       buttonBorderColor,
+      buttonBorderRadius,
+      videoThumbnailBorderRadius,
       videoType,
       videoUrl,
       video,
-      iconImage,
-      iconImageSize,
+      playIconImage,
+      playIconImageSize,
       imageSize,
       selectedSize,
       videoLightboxOpacity
     } = attributes;
     const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
     //const videoContent = videoUrl != '' ? videoUrl : video;
-
+    const video_Url = () => {
+      console.log('rr');
+    };
     const customStyles = `
       .video-lightbox-fancy .fancybox__backdrop {
         background: ${videoLightboxColor};
@@ -653,36 +705,45 @@ __webpack_require__.r(__webpack_exports__);
       }
       .video-lightbox-fancy .fancybox__content {
         max-width: ${videoLightboxWidth}px;
+        width: 100% !important;
       }
       .button-open-vl {
-        background-color: ${buttonBackgroundColor};
-        color: ${buttonTextColor};
-        border: ${buttonBorderWidth}px solid ${buttonBorderColor};
+        background-color: ${buttonBackgroundColor} !important;
+        color: ${buttonTextColor} !important;
+        border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
+        border-radius: ${buttonBorderRadius}px !important;
       }
       .button-open-vl:hover {
-        background-color: ${buttonBackgroundHoverColor};
-        color: ${buttonTextHoverColor};
-        border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor};
+        background-color: ${buttonBackgroundHoverColor} !important;
+        color: ${buttonTextHoverColor} !important;
+        border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
+      }
+      .video-thumbnail{
+        border-radius: ${videoThumbnailBorderRadius}px;
       }
       /* Add more styles as needed */
     `;
     return /** Structure to show for update data */(
-      (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), attributes.selection === 'button' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), attributes.selection === 'button' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        href: video,
         class: "button-open-vl",
         type: "button",
         "data-fancybox": "video-lightbox",
         style: {/* backgroundColor: buttonBackgroundColor, textColor: buttonTextColor, borderWidth: buttonBorderWidth */}
-      }, buttonContent), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        class: "hidden"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
-        src: video
-      }))) : attributes.selection === 'media' && selectedSize && image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      }, buttonContent)) : attributes.selection === 'media' && selectedSize && image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        href: video,
         "data-fancybox": "video-lightbox",
-        href: video
+        class: "video-thumbnail"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
         src: attributes.image.sizes[selectedSize].url,
         alt: attributes.image.alt ? attributes.image.alt : ''
-      })))
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+        className: "play-icon",
+        style: `width:${playIconImageSize}px`
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+        src: playIconImage,
+        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Icon', 'videolightboxforgutenberg')
+      }))))
     );
   }
 });

@@ -76,14 +76,14 @@ registerBlockType('video-lightbox-block/video-lightbox', {
             default: false,
         },
         /** Icon Image Upload Option Settings*/
-        iconImage: {
+        playIconImage: {
             type: 'string',
             default: null,
         },
         /** Icon Image Size Option Settings in pixels*/
-        iconImageSize: {
-            type: 'string',
-            default: '30px', // Default icon size in pixels
+        playIconImageSize: {
+            type: 'number',
+            default: 30, // Default icon size in pixels
         },
         /** Video Lightbox Background color */
         videoLightboxColor: {
@@ -116,6 +116,14 @@ registerBlockType('video-lightbox-block/video-lightbox', {
             type: 'string',
             default: null, // Default video type
         },
+        buttonBorderRadius: {
+            type: 'number',
+            default: 0,
+        },
+        videoThumbnailBorderRadius: {
+            type: 'number',
+            default: 0,
+        }
     },
 
 
@@ -136,9 +144,9 @@ registerBlockType('video-lightbox-block/video-lightbox', {
         const { image } = attributes;
         const [val, setVal] = useState('');
         const [err, setErr] = useState('');
-        const { buttonBorderWidth, buttonBorderColor, buttonBorderHoverColor, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextColor, buttonTextHoverColor,  } = attributes;
+        const { buttonBorderWidth, buttonBorderColor, buttonBorderHoverColor, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextColor, buttonTextHoverColor, buttonBorderRadius, videoThumbnailBorderRadius } = attributes;
 
-        console.log(selectedSize);
+        //console.log(selectedSize);
 
         /** get thumbnail image sizes from wordpress */
         const imageSizes = select('core/editor').getEditorSettings().imageSizes.map((size) => size.slug);
@@ -176,7 +184,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 
         const onSelectIcon = (newIcon) => {
             if (newIcon && (newIcon.mime === 'image/jpeg' || newIcon.mime === 'image/jpg' || newIcon.mime === 'image/png' || newIcon.mime === 'image/svg+xml')) {
-                setAttributes({ iconImage: newIcon.url });
+                setAttributes({ playIconImage: newIcon.url });
                 setErrorMessagePlayIcon('');
             } else {
                 setErrorMessagePlayIcon('Invalid file type. Please select a JPG, PNG, or SVG file.');
@@ -185,7 +193,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 
         /** Remove Play Icon */
         const removeIcon = () => {
-            setAttributes({ iconImage: '' });
+            setAttributes({ playIconImage: '' });
         };
 
         const handleSelectionChange = (newSelection) => {
@@ -218,24 +226,35 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 
         const handleBorderHoverColorChange = (color) => {
             setAttributes({ buttonBorderHoverColor: color });
-        };
-
-        
+        };        
 
         const handleButtonBorderWidth = (value) => {
             setAttributes({ buttonBorderWidth: value });
+        };
+
+        
+        const handleButtonBorderRadius = (value) => {
+            setAttributes({ buttonBorderRadius: value });
         };
 
         const handleImageSizeChange = (newSize) => {
             setAttributes({ imageSize: newSize });
         };
 
+        const handleVideoThumbnailBorderRadius = (value) => {
+            setAttributes({ videoThumbnailBorderRadius: value });
+        };
+
         const handleToggleChange = (checked) => {
             setAttributes({ additionalSettingsEnabled: checked });
         };
 
-        const handleIconSizeChange = (newSize) => {
-            setAttributes({ iconImageSize: newSize });
+        const handlePlayIconSizeChange = (newSize) => {
+            setAttributes({ playIconImageSize: newSize });
+        };
+
+        const handlePlayIconImageChange = (value) => {
+            setAttributes({ playIconImage: value });
         };
 
         const handleColorChange = (color) => {
@@ -261,7 +280,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
         };
 
         const validate = (newUrl) => {
-            console.log(newUrl);
+            //console.log(newUrl);
             setVal(newUrl);
             if (isURL(newUrl)) {
                 setErr('Valid URL');
@@ -306,11 +325,16 @@ registerBlockType('video-lightbox-block/video-lightbox', {
         background-color: ${buttonBackgroundColor};
         color: ${buttonTextColor};
         border: ${buttonBorderWidth}px solid ${buttonBorderColor};
+        border-radius: ${buttonBorderRadius}px !important;
       }
       .button-open-vl:hover {
         background-color: ${buttonBackgroundHoverColor};
         color: ${buttonTextHoverColor};
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor};
+      }
+
+      .video-thumbnail {
+        border-radius: ${videoThumbnailBorderRadius}px;
       }
       /* Add more styles as needed */
     `;
@@ -359,11 +383,19 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                 <RangeControl
                                     label={__('Button Border Width', 'videolightboxforgutenberg')}
                                     value={attributes.buttonBorderWidth}
-                                    onChange={handleButtonBorderWidth}
+                                    onChange={handleButtonBorderWidth}                                    
                                     min={0}
                                     max={2}
                                     step={1}
                                 />
+                                <RangeControl
+                                    label={__('Button Border Radius', 'videolightboxforgutenberg')}
+                                    value={attributes.buttonBorderRadius}
+                                    onChange={handleButtonBorderRadius}
+                                    min={0}
+                                    max={30}
+                                    step={2}
+                                />                                
                                 <PanelColorSettings
                                     title={__('Button Design', 'videolightboxforgutenberg')}
                                     colorSettings={[
@@ -413,7 +445,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                         )}
 
                         {attributes.selection === 'media' && (
-                            <PanelBody title={__('Media Upload Settings', 'videolightboxforgutenberg')}>
+                            <PanelBody title={__('Play Icon Settings', 'videolightboxforgutenberg')}>                                
                                 <ToggleControl
                                     label={__('Play Icon', 'videolightboxforgutenberg')}
                                     checked={attributes.additionalSettingsEnabled}
@@ -422,16 +454,16 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 
                                 {attributes.additionalSettingsEnabled && (
                                     <div>
-                                        {attributes.iconImage ? (
+                                        {attributes.playIconImage ? (
                                             <div>
-                                                <img src={attributes.iconImage} alt="Uploaded Icon" />
+                                                <img src={attributes.playIconImage} alt="Uploaded Icon" />
                                                 <Button onClick={removeIcon}>Remove</Button>
                                             </div>
                                         ) : (
                                             <MediaUpload
                                                 onSelect={onSelectIcon}
                                                 type="image"
-                                                value={attributes.iconImage}
+                                                value={attributes.playIconImage}
                                                 accept="image/jpeg,image/jpg,image/png,image/svg+xml"
                                                 render={({ open }) => (
                                                     <div>
@@ -447,24 +479,19 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                         )}
 
                                         {errorMessagePlayIcon && <p style={{ color: 'red' }}>{errorMessagePlayIcon}</p>}
-
+                                        <RangeControl
+                                            label={__('Play Icon Size', 'videolightboxforgutenberg')}
+                                            value={attributes.playIconImageSize}
+                                            onChange={handlePlayIconSizeChange}
+                                            min={0}
+                                            max={50}
+                                            step={2}
+                                        />
                                     </div>
                                 )}
+                                
 
-                                <TextControl
-                                    label={__('Icon Size (in pixels)', 'videolightboxforgutenberg')}
-                                    value={attributes.iconImageSize}
-                                    onChange={handleIconSizeChange}
-                                />
-
-                                <SelectControl
-                                    label={__('Select Image Size', 'videolightboxforgutenberg')}
-                                    value={selectedSize}
-                                    options={imageSizes.map((size) => ({ label: size, value: size }))}
-                                    //onChange={(onSelectImageSize) => setSize(onSelectImageSize)}
-                                    //onChange={handleSizeChange}
-                                    onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
-                                />
+                                
 
                                 {/**
                              * <SelectControl
@@ -484,6 +511,14 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                         )}
 
                         <PanelBody title={__('Video Type Settings', 'videolightboxforgutenberg')}>
+                            <SelectControl
+                                label={__('Video Thumbnail Size', 'videolightboxforgutenberg')}
+                                value={selectedSize}
+                                options={imageSizes.map((size) => ({ label: size, value: size }))}
+                                //onChange={(onSelectImageSize) => setSize(onSelectImageSize)}
+                                //onChange={handleSizeChange}
+                                onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
+                            />
                             <RadioControl
                                 label={__('Select Video Type', 'videolightboxforgutenberg')}
                                 selected={attributes.videoType}
@@ -534,6 +569,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
 
                                 </>
                             )}
+                            
 
                         </PanelBody>
 
@@ -549,6 +585,14 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                 ]}
                             />
                             <RangeControl
+                                label={__('Video Thumbnail Border Radius', 'videolightboxforgutenberg')}
+                                value={attributes.videoThumbnailBorderRadius}
+                                onChange={handleVideoThumbnailBorderRadius}
+                                min={0}
+                                max={30}
+                                step={2}
+                            />
+                            <RangeControl
                                 label={__('Lightbox Opacity', 'videolightboxforgutenberg')}
                                 value={attributes.videoLightboxOpacity}
                                 onChange={handleOpacityChange}
@@ -561,7 +605,7 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                                 value={attributes.videoLightboxWidth}
                                 onChange={handleWidthChange}
                                 min={320}
-                                max={1920}
+                                max={1180}
                                 step={10}
                             />
                         </PanelBody>
@@ -651,10 +695,12 @@ registerBlockType('video-lightbox-block/video-lightbox', {
      */
     save: function ({ attributes }) {
         /** Get constant values contains values to save */
-        const { selection, image, buttonText, buttonBorderWidth, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextHoverColor, buttonBorderHoverColor, videoLightboxWidth, videoLightboxColor, buttonTextColor, buttonBorderColor, videoType, videoUrl, video, iconImage, iconImageSize, imageSize, selectedSize, videoLightboxOpacity } = attributes;
+        const { selection, image, buttonText, buttonBorderWidth, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextHoverColor, buttonBorderHoverColor, videoLightboxWidth, videoLightboxColor, buttonTextColor, buttonBorderColor, buttonBorderRadius, videoThumbnailBorderRadius, videoType, videoUrl, video, playIconImage, playIconImageSize, imageSize, selectedSize, videoLightboxOpacity } = attributes;
         const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
         //const videoContent = videoUrl != '' ? videoUrl : video;
-
+        const video_Url = () => {
+            console.log('rr');
+        }
         const customStyles = `
       .video-lightbox-fancy .fancybox__backdrop {
         background: ${videoLightboxColor};
@@ -662,16 +708,21 @@ registerBlockType('video-lightbox-block/video-lightbox', {
       }
       .video-lightbox-fancy .fancybox__content {
         max-width: ${videoLightboxWidth}px;
+        width: 100% !important;
       }
       .button-open-vl {
-        background-color: ${buttonBackgroundColor};
-        color: ${buttonTextColor};
-        border: ${buttonBorderWidth}px solid ${buttonBorderColor};
+        background-color: ${buttonBackgroundColor} !important;
+        color: ${buttonTextColor} !important;
+        border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
+        border-radius: ${buttonBorderRadius}px !important;
       }
       .button-open-vl:hover {
-        background-color: ${buttonBackgroundHoverColor};
-        color: ${buttonTextHoverColor};
-        border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor};
+        background-color: ${buttonBackgroundHoverColor} !important;
+        color: ${buttonTextHoverColor} !important;
+        border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
+      }
+      .video-thumbnail{
+        border-radius: ${videoThumbnailBorderRadius}px;
       }
       /* Add more styles as needed */
     `;
@@ -693,19 +744,19 @@ registerBlockType('video-lightbox-block/video-lightbox', {
                 */}
                 {attributes.selection === 'button' ? (
                     <>
-                        <button class="button-open-vl" type="button" data-fancybox="video-lightbox"
+                        <a href={video} class="button-open-vl" type="button" data-fancybox="video-lightbox"
                             style={{/* backgroundColor: buttonBackgroundColor, textColor: buttonTextColor, borderWidth: buttonBorderWidth */}}
                         >
                             {buttonContent}
-                        </button>
-                        <div class="hidden" >
-                            <video src={video}></video>
-                        </div>
+                        </a>
                     </>
                 ) : (
                         attributes.selection === 'media' && selectedSize && image && (
-                            <a data-fancybox="video-lightbox" href={video} >                                                               
+                            <a href={video} data-fancybox="video-lightbox" class="video-thumbnail" >
                                 <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
+                                <span className="play-icon" style={`width:${playIconImageSize}px`}>
+                                    <img src={playIconImage} alt={__('Play Icon', 'videolightboxforgutenberg' )} />
+                                </span>
                             </a>
                         )
                 )}

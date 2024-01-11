@@ -17,4 +17,19 @@
   transition: 0.5s ease all;
 }
 
+.video-thumbnail {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-thumbnail .play-icon {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 /*# sourceMappingURL=style-index.css.map*/
