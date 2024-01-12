@@ -29,6 +29,10 @@
   	margin-bottom: 12px;
   }*/
 }
+.video-lightbox .components-button {
+  background-color: #3858e9;
+}
+.video-lightbox .components-button,
 .video-lightbox button {
   display: flex;
   align-items: center;
@@ -39,6 +43,7 @@
   height: 36px;
   transition: 0.5s ease all;
 }
+.video-lightbox .components-button:hover,
 .video-lightbox button:hover {
   background-color: var(--wp--preset--color--black, var(--wp-admin-theme-color, #000000));
   color: #ffffff;

@@ -10,7 +10,7 @@
 	color: #fff;
 	padding: 2px;
 }
-
+ 
 .button-open-vl {
     transition: 0.5s ease all;
 }
@@ -26,4 +26,10 @@
     top: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+}
+.button-open-vl {
+    @extend button !optional;
+}
+.button-open-vl button {
+    transition: 0.5s ease all;
 }

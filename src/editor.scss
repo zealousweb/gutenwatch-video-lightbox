@@ -4,6 +4,7 @@
  * Replace them with your own styles or remove the file completely.
  */
 
+ 
 .video-lightbox {
 	display: flex;
 	flex-wrap: wrap;
@@ -28,6 +29,10 @@
 			margin-bottom: 12px;
 		}*/
 	}
+    .components-button {
+        background-color: #3858e9;
+    }
+    .components-button,
 	button {
 		display: flex;
 		align-items: center;
@@ -88,8 +93,5 @@
 			font-size: 20px !important;
 			margin: 0;
 		}
-	}
-
-	.upload-image {
 	}
 }

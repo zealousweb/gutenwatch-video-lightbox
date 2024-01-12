@@ -1,19 +1,19 @@
 <?php
 /**
- * Plugin Name:       Video Lightbox for Gutenberg
- * Description:       Working copy Example block scaffolded with Create Block tool.
+ * Plugin Name:       Video Lightbox For Guten Blocks
+ * Description:       Video.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
  * Author:            The WordPress Contributors
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       my-first-block
+ * Text Domain:       video-lightbox-for-guten-blocks
  *
  * @package           create-block
  */
 
-if (!defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
@@ -21,8 +21,18 @@ if (!defined('VIDEO_LIGHTBOX_VERSION')) {
     define('VIDEO_LIGHTBOX_VERSION', time());
 }
 
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init() {
+	register_block_type( __DIR__ . '/build' );
+}
+add_action( 'init', 'video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init' );
 
-//require_once GRID_MASONRY_DIR . '/inc/custom-functions.php';
 
 /**
  * Register block assets.
@@ -32,7 +42,7 @@ if (!defined('VIDEO_LIGHTBOX_VERSION')) {
 function Video_Lightbox_For_Gutenberg_Block_init(){
 
     wp_enqueue_script(
-        'fancyapp-lib-video-lb',
+        'video-lightbox-fancybox-lib-js',
         plugins_url('/assets/js/fancybox.umd.js', __FILE__),
         array('jquery'),
         '5.0.24',
@@ -40,7 +50,7 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
     );
 
     wp_enqueue_style(
-        'fancyapp-css-video-lb',
+        'video-lightbox-fancybox-lib-css',
         plugins_url('/assets/css/fancybox.css', __FILE__),
         '',
         '5.0.24',
@@ -48,29 +58,25 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
     );
 
 	wp_enqueue_script(
-        'script-custom-video-lb',
+        'video-lightbox-script-custom',
         plugins_url('/assets/js/script.js', __FILE__),
-        array('jquery', 'fancyapp-lib-video-lb'),
+        array('jquery', 'video-lightbox-fancybox-lib-js'),
         VIDEO_LIGHTBOX_VERSION,
         true
     );
 
-    wp_enqueue_style(
-        'front-styles',
-        plugins_url('/build/style-index.css', __FILE__),
-        VIDEO_LIGHTBOX_VERSION,
-        true
-    );
-
-    register_block_type( __DIR__ . '/build' );
-
+    // wp_enqueue_style(
+    //     'front-styles',
+    //     plugins_url('/build/style-index.css', __FILE__),
+    //     VIDEO_LIGHTBOX_VERSION,
+    //     true
+    // );
 }
 
 add_action('init', 'Video_Lightbox_For_Gutenberg_Block_init');
 
-
 /**
- * Undocumented function
+ * Category Creation function
  *
  * @param array $categories - list of category.
  *

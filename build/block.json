@@ -1,17 +1,106 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "create-block/my-first-block",
+  "name": "video-lightbox-for-guten-blocks/videolightbox",
   "version": "0.1.0",
-  "title": "My First Block",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
-  "example": {},
-  "supports": {
-    "html": false
+  "title": "Video Lightbox",
+  "category": "zealblocks",
+  "icon": "video-alt3",
+  "description": "Video Lightbox.",
+  "attributes": {
+    "image": {
+      "type": "object",
+      "default": null
+    },
+    "selection": {
+      "type": "string",
+      "default": "button"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Button Text"
+    },
+    "buttonBackgroundColor": {
+      "type": "string",
+      "default": "#0073aa"
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonBorderColor": {
+      "type": "string",
+      "default": "#0073aa"
+    },
+    "buttonBackgroundHoverColor": {
+      "type": "string",
+      "default": "#0073aa"
+    },
+    "buttonTextHoverColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonBorderHoverColor": {
+      "type": "string",
+      "default": "#0073aa"
+    },
+    "buttonBorderWidth": {
+      "type": "number",
+      "default": 0
+    },
+    "imageSize": {
+      "type": "string",
+      "default": "full"
+    },
+    "additionalSettingsEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "playIconImage": {
+      "type": "string",
+      "default": null
+    },
+    "playIconImageSize": {
+      "type": "number",
+      "default": 30
+    },
+    "videoLightboxColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "videoLightboxOpacity": {
+      "type": "number",
+      "default": 0.8
+    },
+    "videoLightboxWidth": {
+      "type": "number",
+      "default": 640
+    },
+    "videoType": {
+      "type": "string",
+      "default": null
+    },
+    "selectedSize": {
+      "type": "string",
+      "default": "thumbnail"
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": null
+    },
+    "video": {
+      "type": "string",
+      "default": null
+    },
+    "buttonBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "videoThumbnailBorderRadius": {
+      "type": "number",
+      "default": 0
+    }
   },
-  "textdomain": "my-first-block",
+  "textdomain": "video-lightbox-for-guten-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
