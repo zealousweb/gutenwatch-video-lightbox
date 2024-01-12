@@ -2,13 +2,15 @@
 Contributors:      zealopensource
 Tags:              Video Popup, Video Lightbox, Gutenberg
 Tested up to:      6.4
-Requires PHP:      5.6
-Requires at least: 4.8
+Requires PHP:      7.4
+Requires at least: 6.1
 Stable tag:        1.0
 License:           GPL-3.0-or-later
 License URI:       http://www.gnu.org/licenses/gpl-3.0.html
 
-Displaying a video in a popup when users click on a button or image can enhance the user experience on your site.
+Enhance your WordPress website with the "Video Lightbox for Gutenberg Blocks" plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.
+
+This plugin simplifies the process of embedding and showcasing videos on your site by introducing an intuitive lightbox feature. With a user-friendly interface, you can effortlessly add video content to your posts and pages using native Gutenberg blocks, all while providing a sleek and interactive viewing experience for your audience.
 
 == Description ==
 

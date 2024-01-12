@@ -5,7 +5,7 @@
   "title": "Video Lightbox",
   "category": "zealblocks",
   "icon": "video-alt3",
-  "description": "Video Lightbox.",
+  "description": "Enhance your WordPress website with the Video Lightbox for Gutenberg Blocks plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.",
   "attributes": {
     "image": {
       "type": "object",
