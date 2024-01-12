@@ -214,15 +214,15 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
 
     const customStyles = `
       .button-open-vl {
-        background-color: ${buttonBackgroundColor};
-        color: ${buttonTextColor};
-        border: ${buttonBorderWidth}px solid ${buttonBorderColor};
+        background-color: ${buttonBackgroundColor} !important;
+        color: ${buttonTextColor} !important;
+        border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
         border-radius: ${buttonBorderRadius}px !important;
       }
       .button-open-vl:hover {
-        background-color: ${buttonBackgroundHoverColor};
-        color: ${buttonTextHoverColor};
-        border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor};
+        background-color: ${buttonBackgroundHoverColor} !important;
+        color: ${buttonTextHoverColor} !important;
+        border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
       }
 
       .video-thumbnail {
@@ -499,10 +499,6 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                 {attributes.selection === 'button' && (
                     <Button className="button-open-vl"
                         onClick={() => setAttributes({ selection: 'button' })}
-                        style={{ /*
-                                backgroundColor: attributes.buttonBackgroundColor,
-                                color: attributes.buttonTextColor,*/
-                        }}
                     >
                         {attributes.buttonText}
                     </Button>

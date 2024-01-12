@@ -21,18 +21,6 @@ if (!defined('VIDEO_LIGHTBOX_VERSION')) {
     define('VIDEO_LIGHTBOX_VERSION', time());
 }
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-function video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init() {
-	register_block_type( __DIR__ . '/build' );
-}
-add_action( 'init', 'video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init' );
-
 
 /**
  * Register block assets.
@@ -42,7 +30,7 @@ add_action( 'init', 'video_lightbox_for_guten_blocks_video_lightbox_for_guten_bl
 function Video_Lightbox_For_Gutenberg_Block_init(){
 
     wp_enqueue_script(
-        'video-lightbox-fancybox-lib-js',
+        'video-lightbox-fancybox-library-js',
         plugins_url('/assets/js/fancybox.umd.js', __FILE__),
         array('jquery'),
         '5.0.24',
@@ -50,20 +38,20 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
     );
 
     wp_enqueue_style(
-        'video-lightbox-fancybox-lib-css',
+        'video-lightbox-fancybox-liblibrary-css',
         plugins_url('/assets/css/fancybox.css', __FILE__),
         '',
         '5.0.24',
-        true
+        ''
     );
 
-	wp_enqueue_script(
-        'video-lightbox-script-custom',
-        plugins_url('/assets/js/script.js', __FILE__),
-        array('jquery', 'video-lightbox-fancybox-lib-js'),
-        VIDEO_LIGHTBOX_VERSION,
-        true
-    );
+	// wp_enqueue_script(
+    //     'video-lightbox-script-custom',
+    //     plugins_url('/assets/js/script.js', __FILE__),
+    //     array('jquery', 'video-lightbox-fancybox-library-js'),
+    //     VIDEO_LIGHTBOX_VERSION,
+    //     true
+    // );
 
     // wp_enqueue_style(
     //     'front-styles',
@@ -99,3 +87,15 @@ function VideoLightbox_Plugin_Block_Categories( $categories )
     return $categories;
 }
 add_action('block_categories_all', 'VideoLightbox_Plugin_Block_Categories', 10, 2);
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init() {
+	register_block_type( __DIR__ . '/build' );
+}
+add_action( 'init', 'video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init' );
