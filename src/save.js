@@ -87,7 +87,7 @@ export default function save( {attributes} ) {
                         <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
                         {attributes.additionalSettingsEnabled && attributes.playIconImage && (
                             <span className="play-icon" style={`width:${playIconImageSize}px`}>
-                                <img src={playIconImage} alt={__('Play Icon', 'videolightboxforgutenberg')} />
+                                <img src={playIconImage} alt={__('Play Icon', 'video-lightbox-for-guten-blocks')} />
                             </span>
                         )}
                     </a>

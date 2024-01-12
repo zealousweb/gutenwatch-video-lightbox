@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"name": "video-lightbox-for-guten-blocks/videolightbox",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"title": "Video Lightbox",
 	"category": "zealblocks",
 	"icon": "video-alt3",
@@ -46,8 +46,7 @@
         "buttonBorderWidth": {
             "type": "number",
             "default": 0 
-        },
-        
+        },        
         "imageSize": {
            "type": "string",
             "default": "full"
@@ -74,7 +73,8 @@
         },
         "videoLightboxWidth": {
             "type": "number",
-            "default": 640        },
+            "default": 640
+        },
         "videoType": {
             "type": "string",
             "default": null

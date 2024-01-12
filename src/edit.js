@@ -4,7 +4,6 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -55,7 +54,6 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
 
     /** Constant values to contain default values */
     const onSelectImage = (image) => {
-        console.log(image);
         if (image && (image.mime === 'image/jpeg' || image.mime === 'image/jpg' || image.mime === 'image/png')) {
             setAttributes({
                 image: image,
@@ -155,8 +153,6 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
         setAttributes({ videoLightboxOpacity: value });
     };
 
-
-
     const handleWidthChange = (value) => {
         setAttributes({ videoLightboxWidth: value });
     };
@@ -239,31 +235,30 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                 </style>
             }
             <div className="video-lb-notes">
-                <h2>{__('Select Option for Video Popup', 'videolightboxforgutenberg')}</h2>
+                <h2>{__('Select Option for Video Popup', 'video-lightbox-for-guten-blocks')}</h2>
                 <p>* Please find Video upload, and customization options in sidebar</p>
             </div>
             <RadioControl
                 //label={__('Select Option for Video Popup')}
                 selected={attributes.selection}
                 options={[
-                    { label: __('Button', 'videolightboxforgutenberg'), value: 'button' },
-                    { label: __('Media Upload', 'videolightboxforgutenberg'), value: 'media' },
+                    { label: __('Button', 'video-lightbox-for-guten-blocks'), value: 'button' },
+                    { label: __('Media Upload', 'video-lightbox-for-guten-blocks'), value: 'media' },
                 ]}
                 onChange={handleSelectionChange}
             />
 
             <InspectorControls>
                 <Panel>
-
                     {attributes.selection === 'button' && (
-                        <PanelBody title={__('Button Settings', 'videolightboxforgutenberg')}>
+                        <PanelBody title={__('Button Settings', 'video-lightbox-for-guten-blocks')}>
                             <TextControl
-                                label={__('Button Text', 'videolightboxforgutenberg')}
+                                label={__('Button Text', 'video-lightbox-for-guten-blocks')}
                                 value={attributes.buttonText}
                                 onChange={handleTextChange}
                             />
                             <RangeControl
-                                label={__('Button Border Width', 'videolightboxforgutenberg')}
+                                label={__('Button Border Width', 'video-lightbox-for-guten-blocks')}
                                 value={attributes.buttonBorderWidth}
                                 onChange={handleButtonBorderWidth}
                                 min={0}
@@ -271,7 +266,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                                 step={1}
                             />
                             <RangeControl
-                                label={__('Button Border Radius', 'videolightboxforgutenberg')}
+                                label={__('Button Border Radius', 'video-lightbox-for-guten-blocks')}
                                 value={attributes.buttonBorderRadius}
                                 onChange={handleButtonBorderRadius}
                                 min={0}
@@ -279,47 +274,47 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                                 step={2}
                             />
                             <PanelColorSettings
-                                title={__('Button Design', 'videolightboxforgutenberg')}
+                                title={__('Button Design', 'video-lightbox-for-guten-blocks')}
                                 colorSettings={[
                                     {
                                         value: attributes.buttonBackgroundColor,
                                         onChange: handleBackgroundColorChange,
-                                        label: __('Background Color', 'videolightboxforgutenberg'),
+                                        label: __('Background Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                     {
                                         value: attributes.buttonTextColor,
                                         onChange: handleTextColorChange,
-                                        label: __('Text Color', 'videolightboxforgutenberg'),
+                                        label: __('Text Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                     {
                                         value: attributes.buttonBorderColor,
                                         onChange: handleBorderColorChange,
-                                        label: __('Border Color', 'videolightboxforgutenberg'),
+                                        label: __('Border Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                     {
                                         value: attributes.buttonBackgroundHoverColor,
                                         onChange: handleBackgroundHoverColorChange,
-                                        label: __('Background Hover Color', 'videolightboxforgutenberg'),
+                                        label: __('Background Hover Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                     {
                                         value: attributes.buttonTextHoverColor,
                                         onChange: handleTextHoverColorChange,
-                                        label: __('Text Hover Color', 'videolightboxforgutenberg'),
+                                        label: __('Text Hover Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                     {
                                         value: attributes.buttonBorderHoverColor,
                                         onChange: handleBorderHoverColorChange,
-                                        label: __('Border Hover Color', 'videolightboxforgutenberg'),
+                                        label: __('Border Hover Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                 ]}
                             />
                             {/*<PanelColorSettings
-                                    title={__('Button Text Color', 'videolightboxforgutenberg')}
+                                    title={__('Button Text Color', 'video-lightbox-for-guten-blocks')}
                                     colorSettings={[
                                         {
                                             value: attributes.buttonTextColor,
                                             onChange: handleTextColorChange,
-                                            label: __('Select Button Text Color', 'videolightboxforgutenberg'),
+                                            label: __('Select Button Text Color', 'video-lightbox-for-guten-blocks'),
                                         },
                                     ]}
                                 />*/}
@@ -327,9 +322,9 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                     )}
 
                     {attributes.selection === 'media' && (
-                        <PanelBody title={__('Play Icon Settings', 'videolightboxforgutenberg')}>
+                        <PanelBody title={__('Play Icon Settings', 'video-lightbox-for-guten-blocks')}>
                             <ToggleControl
-                                label={__('Play Icon', 'videolightboxforgutenberg')}
+                                label={__('Play Icon', 'video-lightbox-for-guten-blocks')}
                                 checked={attributes.additionalSettingsEnabled}
                                 onChange={handleToggleChange}
                             />
@@ -352,8 +347,8 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                                                     <Button
                                                         icon="upload"
                                                         onClick={open}
-                                                        aria-label={__('Upload Icon', 'videolightboxforgutenberg')} >
-                                                        <span>{__('Upload Icon', 'videolightboxforgutenberg')}</span>
+                                                        aria-label={__('Upload Icon', 'video-lightbox-for-guten-blocks')} >
+                                                        <span>{__('Upload Icon', 'video-lightbox-for-guten-blocks')}</span>
                                                     </Button>
                                                 </div>
                                             )}
@@ -362,7 +357,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
 
                                     {errorMessagePlayIcon && <p style={{ color: 'red' }}>{errorMessagePlayIcon}</p>}
                                     <RangeControl
-                                        label={__('Play Icon Size', 'videolightboxforgutenberg')}
+                                        label={__('Play Icon Size', 'video-lightbox-for-guten-blocks')}
                                         value={attributes.playIconImageSize}
                                         onChange={handlePlayIconSizeChange}
                                         min={0}
@@ -392,9 +387,9 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                         </PanelBody>
                     )}
 
-                    <PanelBody title={__('Video Type Settings', 'videolightboxforgutenberg')}>
+                    <PanelBody title={__('Video Type Settings', 'video-lightbox-for-guten-blocks')}>
                         <SelectControl
-                            label={__('Video Thumbnail Size', 'videolightboxforgutenberg')}
+                            label={__('Video Thumbnail Size', 'video-lightbox-for-guten-blocks')}
                             value={selectedSize}
                             options={imageSizes.map((size) => ({ label: size, value: size }))}
                             //onChange={(onSelectImageSize) => setSize(onSelectImageSize)}
@@ -402,7 +397,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                             onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
                         />
                         <RadioControl
-                            label={__('Select Video Type', 'videolightboxforgutenberg')}
+                            label={__('Select Video Type', 'video-lightbox-for-guten-blocks')}
                             selected={attributes.videoType}
                             options={[
                                 { label: 'Upload Video', value: 'uploadvideo' },
@@ -415,7 +410,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                         {attributes.videoType === 'videourl' && (
                             <>
                                 <TextControl
-                                    label={__('Video URL', 'videolightboxforgutenberg')}
+                                    label={__('Video URL', 'video-lightbox-for-guten-blocks')}
                                     value={attributes.videoUrl}
                                     onChange={handleVideoUrlChange}
                                     isRequired={true}
@@ -440,7 +435,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                                             value={attributes.video}
                                             render={({ open }) => (
                                                 <Button onClick={open}>
-                                                    {__('Upload Video', 'videolightboxforgutenberg')}
+                                                    {__('Upload Video', 'video-lightbox-for-guten-blocks')}
                                                 </Button>
                                             )}
                                         />
@@ -455,19 +450,19 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
 
                     </PanelBody>
 
-                    <PanelBody title={__('Video Lightbox Settings', 'videolightboxforgutenberg')}>
+                    <PanelBody title={__('Video Lightbox Settings', 'video-lightbox-for-guten-blocks')}>
                         <PanelColorSettings
-                            title={__('Lightbox Color', 'videolightboxforgutenberg')}
+                            title={__('Lightbox Color', 'video-lightbox-for-guten-blocks')}
                             colorSettings={[
                                 {
                                     value: attributes.videoLightboxColor,
                                     onChange: handleColorChange,
-                                    label: __('Select Lightbox Color', 'videolightboxforgutenberg'),
+                                    label: __('Select Lightbox Color', 'video-lightbox-for-guten-blocks'),
                                 },
                             ]}
                         />
                         <RangeControl
-                            label={__('Video Thumbnail Border Radius', 'videolightboxforgutenberg')}
+                            label={__('Video Thumbnail Border Radius', 'video-lightbox-for-guten-blocks')}
                             value={attributes.videoThumbnailBorderRadius}
                             onChange={handleVideoThumbnailBorderRadius}
                             min={0}
@@ -475,7 +470,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                             step={2}
                         />
                         <RangeControl
-                            label={__('Lightbox Opacity', 'videolightboxforgutenberg')}
+                            label={__('Lightbox Opacity', 'video-lightbox-for-guten-blocks')}
                             value={attributes.videoLightboxOpacity}
                             onChange={handleOpacityChange}
                             min={0}
@@ -483,7 +478,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                             step={0.1}
                         />
                         <RangeControl
-                            label={__('Lightbox Width', 'videolightboxforgutenberg')}
+                            label={__('Lightbox Width', 'video-lightbox-for-guten-blocks')}
                             value={attributes.videoLightboxWidth}
                             onChange={handleWidthChange}
                             min={320}
@@ -548,7 +543,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations } ) {
                                         ) : (
                                             <Button className="upload-image" onClick={open}>
                                                 <svg viewBox="0 0 24 24" width="24" fill="#000000"><g> <rect x="0" fill="none" width="24" height="24"></rect> <g> <path d="M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"></path> </g> </g></svg>
-                                                {__('upload Image', 'videolightboxforgutenberg')}
+                                                {__('upload Image', 'video-lightbox-for-guten-blocks')}
                                             </Button>
                                         )}
                                     </>
