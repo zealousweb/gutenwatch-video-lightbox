@@ -44,21 +44,6 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
         '5.0.24',
         ''
     );
-
-	// wp_enqueue_script(
-    //     'video-lightbox-script-custom',
-    //     plugins_url('/assets/js/script.js', __FILE__),
-    //     array('jquery', 'video-lightbox-fancybox-library-js'),
-    //     VIDEO_LIGHTBOX_VERSION,
-    //     true
-    // );
-
-    // wp_enqueue_style(
-    //     'front-styles',
-    //     plugins_url('/build/style-index.css', __FILE__),
-    //     VIDEO_LIGHTBOX_VERSION,
-    //     true
-    // );
 }
 
 add_action('init', 'Video_Lightbox_For_Gutenberg_Block_init');

@@ -51,7 +51,7 @@
       "type": "string",
       "default": "full"
     },
-    "additionalSettingsEnabled": {
+    "playIconEnabled": {
       "type": "boolean",
       "default": false
     },

@@ -32,39 +32,6 @@
 .video-lightbox .components-button {
   background-color: #3858e9;
 }
-.video-lightbox .components-button,
-.video-lightbox button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
-  padding: 0 12px !important;
-  height: 36px;
-  transition: 0.5s ease all;
-}
-.video-lightbox .components-button:hover,
-.video-lightbox button:hover {
-  background-color: var(--wp--preset--color--black, var(--wp-admin-theme-color, #000000));
-  color: #ffffff;
-}
-.video-lightbox .video-thumbnail {
-  position: relative;
-  background-color: #fff;
-}
-.video-lightbox .video-thumbnail .button-remove {
-  position: absolute;
-  background-color: #fff;
-  width: 30px;
-  height: 30px;
-  display: block;
-  right: 8px;
-  top: 8px;
-  padding: 2px !important;
-}
-.video-lightbox .video-thumbnail svg {
-  fill: none;
-}
 .video-lightbox .video-lb-notes {
   width: 100%;
   padding: 3px 5px;
@@ -82,6 +49,56 @@
 .video-lightbox .video-lb-notes h2 {
   font-size: 20px !important;
   margin: 0;
+}
+
+.video-thumbnail {
+  position: relative;
+  background-color: #fff;
+}
+
+.vl-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.16);
+  padding: 0 12px !important;
+  height: 36px;
+  line-height: 36px;
+  transition: 0.5s ease all;
+  white-space: nowrap;
+}
+
+.vl-thumbnail {
+  position: relative;
+}
+
+.vl-icon-text-button {
+  border-radius: 4px;
+}
+.vl-icon-text-button svg {
+  width: 24px;
+  min-width: 24px;
+  margin-right: 8px;
+}
+
+.vl-icon-button {
+  position: absolute;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  display: block;
+  right: 8px;
+  top: 8px;
+  padding: 2px !important;
+}
+.vl-icon-button svg {
+  fill: none;
+  position: absolute;
+  width: 24px;
+  min-width: 24px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*# sourceMappingURL=index.css.map*/

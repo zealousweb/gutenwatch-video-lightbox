@@ -24,7 +24,7 @@ import { __ } from '@wordpress/i18n';
 export default function save( {attributes} ) {
 
     /** Get constant values contains values to save */
-    const { selection, image, buttonText, buttonBorderWidth, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextHoverColor, buttonBorderHoverColor, videoLightboxWidth, videoLightboxColor, buttonTextColor, buttonBorderColor, buttonBorderRadius, videoThumbnailBorderRadius, videoType, videoUrl, video, additionalSettingsEnabled, playIconImage, playIconImageSize, imageSize, selectedSize, videoLightboxOpacity } = attributes;
+    const { selection, image, buttonText, buttonBorderWidth, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextHoverColor, buttonBorderHoverColor, videoLightboxWidth, videoLightboxColor, buttonTextColor, buttonBorderColor, buttonBorderRadius, videoThumbnailBorderRadius, videoType, videoUrl, video, playIconEnabled, playIconImage, playIconImageSize, imageSize, selectedSize, videoLightboxOpacity } = attributes;
     const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
 
     function isValidHttpUrl(str) {
@@ -94,7 +94,7 @@ export default function save( {attributes} ) {
                 attributes.selection === 'media' && selectedSize && image && ((isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo')) && (
                     <a data-fancybox="video-lightbox" href={attributes.videoUrl || attributes.video} class="video-thumbnail" >
                         <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
-                        {attributes.additionalSettingsEnabled && attributes.playIconImage ? (
+                        {attributes.playIconEnabled && attributes.playIconImage ? (
                             <span className="play-icon" style={`width:${playIconImageSize}px`}>
                                 <img src={playIconImage} alt={__('Play Icon', 'video-lightbox-for-guten-blocks')} />
                             </span>
