@@ -48,13 +48,13 @@ export default function save( {attributes} ) {
         max-width: ${videoLightboxWidth}px;
         width: 100% !important;
       }
-      .button-open-vl button{
+      .vl-button button{
         background-color: ${buttonBackgroundColor} !important;
         color: ${buttonTextColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
         border-radius: ${buttonBorderRadius}px !important;
       }
-      .button-open-vl:hover button {
+      .vl-button:hover button {
         background-color: ${buttonBackgroundHoverColor} !important;
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
@@ -81,7 +81,7 @@ export default function save( {attributes} ) {
                 */}
             {attributes.selection === 'button' && ((isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo')) ? (
                 <>
-                    <a data-fancybox="video-lightbox" href={attributes.videoUrl || attributes.video} class="button-open-vl"
+                    <a data-fancybox="video-lightbox" href={attributes.videoUrl || attributes.video} class="vl-button vl-icon-text-button"
                         style={{/* backgroundColor: buttonBackgroundColor, textColor: buttonTextColor, borderWidth: buttonBorderWidth */ }}
                     >
 						<button>

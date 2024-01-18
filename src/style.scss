@@ -10,26 +10,76 @@
 	color: #fff;
 	padding: 2px;
 }
- 
-.button-open-vl {
-    transition: 0.5s ease all;
+
+.vl-button,
+.vl-button button {
+	transition: 0.5s ease all;
 }
 .video-thumbnail {
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
 }
 .video-thumbnail .play-icon {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
 }
-.button-open-vl {
-    @extend button !optional;
+.vl-button  button {
+	@extend button !optional;
 }
-.button-open-vl button {
-    transition: 0.5s ease all;
+
+.vl-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.16);
+	padding: 0 12px !important;
+	height: 36px;
+	line-height: 36px;
+	transition: 0.5s ease all;
+	white-space: nowrap;
+	// &:hover {
+	// 	background-color: var(
+	// 		--wp--preset--color--black,
+	// 		var(--wp-admin-theme-color, #000000)
+	// 	);
+	// 	color: #ffffff;
+	// }
+}
+
+.vl-thumbnail {
+	position: relative;
+}
+
+.vl-icon-text-button {
+	border-radius: 4px;
+	svg {
+		width: 24px;
+		min-width: 24px;
+		margin-right: 8px;
+	}
+}
+
+.vl-icon-button {
+	position: absolute;
+	background-color: #fff;
+	width: 30px;
+	height: 30px;
+	display: block;
+	right: 8px;
+	top: 8px;
+	padding: 2px !important;
+	svg {
+		fill: none;
+		position: absolute;
+		width: 24px;
+		min-width: 24px;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
 }
