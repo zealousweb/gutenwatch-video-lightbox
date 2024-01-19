@@ -17,7 +17,7 @@
     },
     "buttonText": {
       "type": "string",
-      "default": "Button Text"
+      "default": "Play Video"
     },
     "buttonBackgroundColor": {
       "type": "string",
