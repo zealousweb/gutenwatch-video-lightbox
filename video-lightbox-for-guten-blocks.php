@@ -81,6 +81,10 @@ add_action('block_categories_all', 'VideoLightbox_Plugin_Block_Categories', 10, 
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init() {
+    if ( ! function_exists( 'register_block_type' ) ) {
+        // Block editor is not available.
+        return;
+    }
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init' );

@@ -38,15 +38,9 @@ import './editor.scss';
  */
 export default function Edit({ attributes, setAttributes, noticeOperations }) {
 
-    const { useState } = wp.element;
-    const [errorMessage, setErrorMessage] = useState('');
-    const [errorMessagePlayIcon, setErrorMessagePlayIcon] = useState('');
-    const [errorMessageUploadVideo, setErrorMessageUploadVideo] = useState('');
     const { selectedSize } = attributes;
     const { video } = attributes;
     const { image } = attributes;
-    const [val, setVal] = useState('');
-    const [err, setErr] = useState('');
     const { buttonBorderWidth, buttonBorderColor, buttonBorderHoverColor, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextColor, buttonTextHoverColor, buttonBorderRadius, videoThumbnailBorderRadius } = attributes;
 
     /** get thumbnail image sizes from wordpress */
@@ -57,11 +51,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
         if (image && (image.mime === 'image/jpeg' || image.mime === 'image/jpg' || image.mime === 'image/png')) {
             setAttributes({
                 image: image,
-                //image_url: image.sizes[selectedSize].url
             });
-            setErrorMessage('');
-        } else {
-            setErrorMessage('Invalid file type. Please select a JPG, JPEG or PNG file.');
         }
     };
 
@@ -70,12 +60,10 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
         setAttributes({ image: '' });
     };
 
+    /** On Select Play Icon */
     const onSelectIcon = (newIcon) => {
         if (newIcon && (newIcon.mime === 'image/jpeg' || newIcon.mime === 'image/jpg' || newIcon.mime === 'image/png' || newIcon.mime === 'image/svg+xml')) {
             setAttributes({ playIconImage: newIcon.url });
-            setErrorMessagePlayIcon('');
-        } else {
-            setErrorMessagePlayIcon('Invalid file type. Please select a JPG, PNG, or SVG file.');
         }
     };
 
@@ -84,50 +72,60 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
         setAttributes({ playIconImage: '' });
     };
 
+    /** Handling Button or Image to appear on Front-end */
     const handleSelectionChange = (newSelection) => {
         setAttributes({ selection: newSelection });
     };
 
+    /** Handling Button Text */
     const handleTextChange = (newText) => {
         setAttributes({ buttonText: newText });
     };
 
+    /** Handling Button Background Color */
     const handleBackgroundColorChange = (color) => {
         setAttributes({ buttonBackgroundColor: color });
     };
 
+    /** Handling Button Text Color */
     const handleTextColorChange = (color) => {
         setAttributes({ buttonTextColor: color });
     };
 
+    /** Handling Button Border Color */
     const handleBorderColorChange = (color) => {
         setAttributes({ buttonBorderColor: color });
     };
 
+    /** Handling Button Hover Background Color */
     const handleBackgroundHoverColorChange = (color) => {
         setAttributes({ buttonBackgroundHoverColor: color });
     };
 
+    /** Handling Button Hover Text Color */
     const handleTextHoverColorChange = (color) => {
         setAttributes({ buttonTextHoverColor: color });
     };
 
+    /** Handling Button Hover Border Color */
     const handleBorderHoverColorChange = (color) => {
         setAttributes({ buttonBorderHoverColor: color });
     };
 
+    /** Handling Button Border Width Size */
     const handleButtonBorderWidth = (value) => {
         setAttributes({ buttonBorderWidth: value });
     };
 
-
+    /** Handling Button Border Radius */
     const handleButtonBorderRadius = (value) => {
         setAttributes({ buttonBorderRadius: value });
     };
 
-    const handleImageSizeChange = (newSize) => {
-        setAttributes({ imageSize: newSize });
-    };
+    // const handleImageSizeChange = (newSize) => {
+    //     setAttributes({ imageSize: newSize });
+    // };
+
 
     const handleVideoThumbnailBorderRadius = (value) => {
         setAttributes({ videoThumbnailBorderRadius: value });
@@ -166,46 +164,17 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
         setAttributes({ video: '' });
     };
 
-    const validate = (newUrl) => {
-        //console.log(newUrl);
-        setVal(newUrl);
-        if (isURL(newUrl)) {
-            setErr('Valid URL');
-            setAttributes({ videoUrl: newUrl });
-        } else {
-            setErr('Invalid URL');
-        }
-    };
-
     /** Upload Video **/
     const onUploadVideo = (newVideo) => {
         if (newVideo && (newVideo.mime === 'video/mp4')) {
             setAttributes({ video: newVideo.url });
             setAttributes({ videoUrl: '' });
-            setErrorMessageUploadVideo('');
-        } else {
-            setErrorMessageUploadVideo('Invalid file type. Please upload mp4 file.');
         }
     };
 
     /** Remove Upload Video */
     const removeVideo = () => {
         setAttributes({ video: '' });
-    };
-
-    const saveBlock = () => {
-        if (!caption) {
-            const errorMessage = 'Caption is required!';
-            const notice = createErrorNotice(errorMessage, {
-                type: 'block',
-                isDismissible: true,
-            });
-            noticeOperations.createNotice(notice);
-            return;
-        }
-
-        // Proceed with saving the block
-        // ...
     };
 
     const customStyles = `
@@ -350,7 +319,6 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
                                         </MediaUploadCheck>
                                     )}
 
-                                    {errorMessagePlayIcon && <p style={{ color: 'red' }}>{errorMessagePlayIcon}</p>}
                                     <RangeControl
                                         label={__('Play Icon Size', 'video-lightbox-for-guten-blocks')}
                                         value={attributes.playIconImageSize}
@@ -419,9 +387,6 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
                                         />
                                     </>
                                 )}
-
-                                {errorMessageUploadVideo && <p style={{ color: 'red' }}>{errorMessageUploadVideo}</p>}
-
                             </>
                         )}
 
@@ -475,7 +440,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
                             label={__('Update Button Text', 'video-lightbox-for-guten-blocks')}
                             value={attributes.buttonText}
                             onChange={handleTextChange}
-                            placeholder={__('Play Video', 'video-lightbox-for-guten-blocks' )}
+                            placeholder={__('Play Video', 'video-lightbox-for-guten-blocks')}
                         />
                         <Button
                             className="vl-button vl-icon-text-button"
@@ -518,9 +483,6 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
                                 )}
                             />
                         </MediaUploadCheck>
-
-                        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-
                     </div>
                 )}
 
