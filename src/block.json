@@ -98,6 +98,10 @@
         "videoThumbnailBorderRadius": {
             "type": "number",
             "default": 0
+        },
+        "text_color": {
+            "type": "string",
+            "default": null
         }
     },
 	"textdomain": "video-lightbox-for-guten-blocks",
