@@ -15,10 +15,6 @@ import { __ } from '@wordpress/i18n';
 import { MediaUploadCheck, MediaUpload, InspectorControls, PanelColorSettings, useBlockProps } from '@wordpress/block-editor';
 import { Button, TextControl, RadioControl, Panel, PanelBody, SelectControl, ToggleControl, IconButton, RangeControl } from '@wordpress/components';
 import { select } from '@wordpress/data';
-import React, { useRef } from 'react';
-import isURL from 'validator/lib/isURL';
-import { createErrorNotice } from '@wordpress/notices';
-import { withDispatch } from '@wordpress/data';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -36,7 +32,7 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit({ attributes, setAttributes, noticeOperations }) {
+export default function Edit({ attributes, setAttributes }) {
 
     const { selectedSize } = attributes;
     const { video } = attributes;
@@ -197,7 +193,7 @@ export default function Edit({ attributes, setAttributes, noticeOperations }) {
     `;
 
     return (
-        <div className="video-lightbox">
+        <div className="video-lightbox" >
             {
                 <style>
                     {customStyles}
