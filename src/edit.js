@@ -250,7 +250,7 @@ export default function Edit({ attributes, setAttributes }) {
                             min={0}
                             max={30}
                             step={2}
-                        />                        
+                        />
                     </PanelBody>
                     <PanelColorSettings
                         title={__('Button Colors', 'video-lightbox-for-guten-blocks')}
@@ -342,18 +342,30 @@ export default function Edit({ attributes, setAttributes }) {
                                         max={100}
                                         step={2}
                                     />
+
+									<SelectControl
+			                            label={__('Video Thumbnail Size', 'video-lightbox-for-guten-blocks')}
+			                            value={selectedSize}
+			                            options={imageSizes.map((size) => ({ label: size, value: size }))}
+			                            onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
+			                        />
+
+									<RangeControl
+			                            label={__('Video Thumbnail Border Radius', 'video-lightbox-for-guten-blocks')}
+			                            value={attributes.videoThumbnailBorderRadius}
+			                            onChange={handleVideoThumbnailBorderRadius}
+			                            min={0}
+			                            max={30}
+			                            step={2}
+			                        />
+
                                 </div>
                             )}
                         </PanelBody>
                     )}
 
                     <PanelBody title={__('Video Type Settings', 'video-lightbox-for-guten-blocks')}>
-                        <SelectControl
-                            label={__('Video Thumbnail Size', 'video-lightbox-for-guten-blocks')}
-                            value={selectedSize}
-                            options={imageSizes.map((size) => ({ label: size, value: size }))}
-                            onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
-                        />
+
                         <RadioControl
                             label={__('Select Video Type', 'video-lightbox-for-guten-blocks')}
                             selected={attributes.videoType}
@@ -408,15 +420,8 @@ export default function Edit({ attributes, setAttributes }) {
 
                     </PanelBody>
 
-                    <PanelBody title={__('Video Lightbox Settings', 'video-lightbox-for-guten-blocks')}>                                           
-                        <RangeControl
-                            label={__('Video Thumbnail Border Radius', 'video-lightbox-for-guten-blocks')}
-                            value={attributes.videoThumbnailBorderRadius}
-                            onChange={handleVideoThumbnailBorderRadius}
-                            min={0}
-                            max={30}
-                            step={2}
-                        />
+                    <PanelBody title={__('Video Lightbox Settings', 'video-lightbox-for-guten-blocks')}>
+
                         <fieldset>
                             <legend className="blocks-base-control__label">
                                 {__('Lightbox Color', 'block-development-examples')}
@@ -444,8 +449,8 @@ export default function Edit({ attributes, setAttributes }) {
                             max={1180}
                             step={10}
                         />
-                        
-                        
+
+
                     </PanelBody>
                     {/**
                     <PanelColorSettings
