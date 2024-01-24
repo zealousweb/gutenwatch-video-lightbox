@@ -804,7 +804,7 @@ function save({
     (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save()
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), attributes.selection === 'button' && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      "data-fancybox": "video-lightbox",
+      "data-fancybox": `video-lightbox-${blockClass}`,
       href: attributes.videoUrl || attributes.video,
       className: `vl-button vl-icon-text-button ${blockClass}`
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -816,7 +816,7 @@ function save({
       d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM10.6935 15.8458L15.4137 13.059C16.1954 12.5974 16.1954 11.4026 15.4137 10.941L10.6935 8.15419C9.93371 7.70561 9 8.28947 9 9.21316V14.7868C9 15.7105 9.93371 16.2944 10.6935 15.8458Z",
       fill: "currentColor"
     }), " ")), buttonContent)) : attributes.selection === 'media' && selectedSize && image && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      "data-fancybox": "video-lightbox",
+      "data-fancybox": `video-lightbox-${blockClass}`,
       href: attributes.videoUrl || attributes.video,
       class: "video-thumbnail"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
