@@ -73,11 +73,17 @@ function Edit({
     buttonTextHoverColor,
     buttonBorderRadius,
     videoThumbnailBorderRadius,
+    blockClass,
     text_color
   } = attributes;
 
   /** get thumbnail image sizes from wordpress */
   const imageSizes = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.select)('core/editor').getEditorSettings().imageSizes.map(size => size.slug);
+  if (blockClass === '') {
+    setAttributes({
+      blockClass: Math.random().toString(36).substring(7)
+    });
+  }
 
   /** Constant values to contain default values */
   const onSelectImage = image => {
@@ -267,18 +273,31 @@ function Edit({
       text_color: hexColor
     });
   };
+  const generateRandomId = () => {
+    const blockId = Math.random().toString(36).substring(7);
+    setAttributes({
+      blockClass: `button-id-${blockId}`
+    });
+  };
+
+  //generateRandomId();
+
+  // Generate a unique identifier for this block instance
+
+  // Create a unique CSS class for this block instance
+  //const blockClass = `button-id-${blockId}`;
 
   /**
    * Custom style selected by User
    */
   const customStyles = `
-      .vl-button {
+      .${blockClass} {
         background-color: ${buttonBackgroundColor} !important;
         color: ${buttonTextColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
         border-radius: ${buttonBorderRadius}px !important;
       }
-      .vl-button:hover {
+      .${blockClass}:hover {
         background-color: ${buttonBackgroundHoverColor} !important;
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
@@ -360,7 +379,7 @@ function Edit({
     src: attributes.playIconImage,
     alt: "Uploaded Icon"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    className: "vl-button vl-icon-button",
+    className: `vl-button vl-icon-button ${blockClass}`,
     onClick: removeIcon
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     viewBox: "0 0 24 24"
@@ -393,7 +412,7 @@ function Edit({
       style: {
         marginBottom: 20
       },
-      className: "vl-button vl-icon-text-button",
+      className: `vl-button vl-icon-text-button ${blockClass}`,
       onClick: open,
       "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload Icon', 'video-lightbox-for-guten-blocks')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -453,7 +472,7 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
     src: attributes.video
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    className: "vl-button vl-icon-button",
+    className: `vl-button vl-icon-button ${blockClass}`,
     onClick: removeVideo
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     viewBox: "0 0 24 24"
@@ -480,7 +499,7 @@ function Edit({
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-      className: "vl-button vl-icon-text-button",
+      className: `vl-button vl-icon-text-button ${blockClass}`,
       onClick: open
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
@@ -535,7 +554,7 @@ function Edit({
     onChange: handleTextChange,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Video', 'video-lightbox-for-guten-blocks')
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    className: "vl-button vl-icon-text-button",
+    className: `vl-button vl-icon-text-button ${blockClass}`,
     onClick: () => setAttributes({
       selection: 'button'
     })
@@ -572,7 +591,7 @@ function Edit({
       d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM10.6935 15.8458L15.4137 13.059C16.1954 12.5974 16.1954 11.4026 15.4137 10.941L10.6935 8.15419C9.93371 7.70561 9 8.28947 9 9.21316V14.7868C9 15.7105 9.93371 16.2944 10.6935 15.8458Z",
       fill: "currentColor"
     }), " ")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-      className: "vl-button vl-icon-button",
+      className: `vl-button vl-icon-button ${blockClass}`,
       onClick: removeImage
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
@@ -596,7 +615,7 @@ function Edit({
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
     }), " ")))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-      className: "vl-button vl-icon-text-button",
+      className: `vl-button vl-icon-text-button ${blockClass}`,
       onClick: open
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
@@ -714,6 +733,7 @@ function save({
 }) {
   /** Get constant values contains values to save */
   const {
+    blockClass,
     selection,
     image,
     buttonText,
@@ -764,13 +784,13 @@ function save({
         max-width: ${videoLightboxWidth}px;
         width: 100% !important;
       }
-      .vl-button{
+      .${blockClass}{
         background-color: ${buttonBackgroundColor} !important;
         color: ${buttonTextColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
         border-radius: ${buttonBorderRadius}px !important;
       }
-      .vl-button:hover {
+      .${blockClass}:hover {
         background-color: ${buttonBackgroundHoverColor} !important;
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
@@ -786,7 +806,7 @@ function save({
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), attributes.selection === 'button' && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       "data-fancybox": "video-lightbox",
       href: attributes.videoUrl || attributes.video,
-      className: "vl-button vl-icon-text-button"
+      className: `vl-button vl-icon-text-button ${blockClass}`
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
       width: "24"
@@ -913,7 +933,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","name":"video-lightbox-for-guten-blocks/videolightbox","version":"1.0.0","title":"Video Lightbox","category":"zealblocks","icon":"video-alt3","description":"Enhance your WordPress website with the Video Lightbox for Gutenberg Blocks plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.","attributes":{"image":{"type":"object","default":null},"selection":{"type":"string","default":"button"},"buttonText":{"type":"string","default":"Play Video"},"buttonBackgroundColor":{"type":"string","default":"#0073aa"},"buttonTextColor":{"type":"string","default":"#ffffff"},"buttonBorderColor":{"type":"string","default":"#0073aa"},"buttonBackgroundHoverColor":{"type":"string","default":"#0073aa"},"buttonTextHoverColor":{"type":"string","default":"#ffffff"},"buttonBorderHoverColor":{"type":"string","default":"#0073aa"},"buttonBorderWidth":{"type":"number","default":0},"imageSize":{"type":"string","default":"full"},"playIconEnabled":{"type":"boolean","default":false},"playIconImage":{"type":"string","default":null},"playIconImageSize":{"type":"number","default":30},"videoLightboxColor":{"type":"string","default":"#000000"},"videoLightboxOpacity":{"type":"number","default":0.8},"videoLightboxWidth":{"type":"number","default":640},"videoType":{"type":"string","default":null},"selectedSize":{"type":"string","default":"thumbnail"},"videoUrl":{"type":"string","default":null},"video":{"type":"string","default":null},"buttonBorderRadius":{"type":"number","default":0},"videoThumbnailBorderRadius":{"type":"number","default":0},"text_color":{"type":"string","default":null}},"textdomain":"video-lightbox-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","name":"video-lightbox-for-guten-blocks/videolightbox","version":"1.0.0","title":"Video Lightbox","category":"zealblocks","icon":"video-alt3","description":"Enhance your WordPress website with the Video Lightbox for Gutenberg Blocks plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.","attributes":{"image":{"type":"object","default":null},"selection":{"type":"string","default":"button"},"buttonText":{"type":"string","default":"Play Video"},"buttonBackgroundColor":{"type":"string","default":"#0073aa"},"buttonTextColor":{"type":"string","default":"#ffffff"},"buttonBorderColor":{"type":"string","default":"#0073aa"},"buttonBackgroundHoverColor":{"type":"string","default":"#0073aa"},"buttonTextHoverColor":{"type":"string","default":"#ffffff"},"buttonBorderHoverColor":{"type":"string","default":"#0073aa"},"buttonBorderWidth":{"type":"number","default":0},"imageSize":{"type":"string","default":"full"},"playIconEnabled":{"type":"boolean","default":false},"playIconImage":{"type":"string","default":null},"playIconImageSize":{"type":"number","default":30},"videoLightboxColor":{"type":"string","default":"#000000"},"videoLightboxOpacity":{"type":"number","default":0.8},"videoLightboxWidth":{"type":"number","default":640},"videoType":{"type":"string","default":null},"selectedSize":{"type":"string","default":"thumbnail"},"videoUrl":{"type":"string","default":null},"video":{"type":"string","default":null},"buttonBorderRadius":{"type":"number","default":0},"videoThumbnailBorderRadius":{"type":"number","default":0},"text_color":{"type":"string","default":null},"blockClass":{"type":"string","default":""}},"textdomain":"video-lightbox-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

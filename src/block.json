@@ -102,6 +102,10 @@
         "text_color": {
             "type": "string",
             "default": null
+        },
+        "blockClass": {
+            "type": "string",
+            "default": ""
         }
     },
 	"textdomain": "video-lightbox-for-guten-blocks",
