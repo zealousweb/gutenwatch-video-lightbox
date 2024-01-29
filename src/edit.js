@@ -59,7 +59,7 @@ export default function Edit({ attributes, setAttributes }) {
         });
     }
 
-    
+
 
     /** Constant values to contain default values */
     const onSelectImage = (image) => {
