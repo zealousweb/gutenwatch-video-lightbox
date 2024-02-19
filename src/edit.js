@@ -184,7 +184,8 @@ export default function Edit({ attributes, setAttributes }) {
 
     /** Upload Video **/
     const onUploadVideo = (newVideo) => {
-        if (newVideo && (newVideo.mime === 'video/mp4')) {
+		console.log(newVideo.mime);
+        if (newVideo && (newVideo.mime === 'video/mp4' || newVideo.mime === 'video/avi')) {
             setAttributes({ video: newVideo.url });
             setAttributes({ videoUrl: '' });
         }
@@ -446,13 +447,12 @@ export default function Edit({ attributes, setAttributes }) {
 
                         <fieldset>
                             <legend className="blocks-base-control__label">
-                                {__('Lightbox Color', 'block-development-examples')}
+                                {__('Lightbox Background Color', 'block-development-examples')}
                             </legend>
                             <ColorPalette
                                 label="test"
                                 value={attributes.videoLightboxColor}
                                 onChange={(hexColor) => setAttributes({ videoLightboxColor: hexColor })}
-                            //onChange={onChangeTextColor}
                             />
                         </fieldset>
                         <RangeControl

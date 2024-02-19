@@ -252,7 +252,8 @@ function Edit({
 
   /** Upload Video **/
   const onUploadVideo = newVideo => {
-    if (newVideo && newVideo.mime === 'video/mp4') {
+    console.log(newVideo.mime);
+    if (newVideo && (newVideo.mime === 'video/mp4' || newVideo.mime === 'video/avi')) {
       setAttributes({
         video: newVideo.url
       });
@@ -525,13 +526,12 @@ function Edit({
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Video Lightbox Settings', 'video-lightbox-for-guten-blocks')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("legend", {
     className: "blocks-base-control__label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Lightbox Color', 'block-development-examples')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Lightbox Background Color', 'block-development-examples')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
     label: "test",
     value: attributes.videoLightboxColor,
     onChange: hexColor => setAttributes({
       videoLightboxColor: hexColor
     })
-    //onChange={onChangeTextColor}
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Lightbox Opacity', 'video-lightbox-for-guten-blocks'),
     value: attributes.videoLightboxOpacity,
