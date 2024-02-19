@@ -302,10 +302,9 @@ function Edit({
         background-color: ${buttonBackgroundHoverColor} !important;
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
-      }
-
-      .video-thumbnail {
-        border-radius: ${videoThumbnailBorderRadius}px;
+      }  
+      .video-thumbnail.${blockClass} {
+        border-radius: ${videoThumbnailBorderRadius}px !important;
       }
       /* Add more styles as needed */
     `;
@@ -371,7 +370,7 @@ function Edit({
   }), attributes.selection === 'media' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Icon Settings', 'video-lightbox-for-guten-blocks')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cusstom Play Icon', 'video-lightbox-for-guten-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Play Icon', 'video-lightbox-for-guten-blocks'),
     checked: attributes.playIconEnabled,
     onChange: handlePlayIcon
   }), attributes.playIconEnabled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.playIconImage ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -469,7 +468,7 @@ function Edit({
     onChange: handleVideoUrlChange,
     isRequired: true
   })), attributes.videoType === 'uploadvideo' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, attributes.video ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "video-thumbnail"
+    className: "video-thumbnail "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
     src: attributes.video
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
@@ -572,7 +571,7 @@ function Edit({
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, attributes.image ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "video-thumbnail"
+      className: `video-thumbnail ${blockClass}`
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: attributes.image.sizes[selectedSize].url,
       alt: attributes.image.alt ? attributes.image.alt : ''
@@ -776,11 +775,11 @@ function save({
     return pattern.test(str);
   }
   const customStyles = `
-      .video-lightbox-fancy .fancybox__backdrop {
-        background: ${videoLightboxColor};
-        opacity: ${videoLightboxOpacity};
+      .${blockClass}-fancy-custom .fancybox__backdrop {
+        background: ${videoLightboxColor} !important;
+        opacity: ${videoLightboxOpacity} !important;
       }
-      .video-lightbox-fancy .fancybox__content {
+      .${blockClass}-fancy-custom .fancybox__content {
         max-width: ${videoLightboxWidth}px;
         width: 100% !important;
       }
@@ -795,8 +794,8 @@ function save({
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
       }
-      .video-thumbnail{
-        border-radius: ${videoThumbnailBorderRadius}px;
+      .video-thumbnail.${blockClass}{
+        border-radius: ${videoThumbnailBorderRadius}px !important;
       }
       /* Add more styles as needed */
     `;
@@ -805,6 +804,7 @@ function save({
       ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save()
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), attributes.selection === 'button' && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       "data-fancybox": `video-lightbox-${blockClass}`,
+      "data-fancy-class": blockClass,
       href: attributes.videoUrl || attributes.video,
       className: `vl-button vl-icon-text-button ${blockClass}`
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -817,8 +817,9 @@ function save({
       fill: "currentColor"
     }), " ")), buttonContent)) : attributes.selection === 'media' && selectedSize && image && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       "data-fancybox": `video-lightbox-${blockClass}`,
+      "data-fancy-class": blockClass,
       href: attributes.videoUrl || attributes.video,
-      class: "video-thumbnail"
+      class: `video-thumbnail ${blockClass}`
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: attributes.image.sizes[selectedSize].url,
       alt: attributes.image.alt ? attributes.image.alt : ''
