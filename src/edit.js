@@ -363,26 +363,24 @@ export default function Edit({ attributes, setAttributes }) {
                                         min={0}
                                         max={100}
                                         step={2}
-                                    />
-
-									<SelectControl
-			                            label={__('Video Thumbnail Size', 'video-lightbox-for-guten-blocks')}
-			                            value={selectedSize}
-			                            options={imageSizes.map((size) => ({ label: size, value: size }))}
-			                            onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
-			                        />
-
-									<RangeControl
-			                            label={__('Video Thumbnail Border Radius', 'video-lightbox-for-guten-blocks')}
-			                            value={attributes.videoThumbnailBorderRadius}
-			                            onChange={handleVideoThumbnailBorderRadius}
-			                            min={0}
-			                            max={30}
-			                            step={2}
-			                        />
-
+                                    />					
                                 </div>
                             )}
+                            <SelectControl
+                                label={__('Video Thumbnail Size', 'video-lightbox-for-guten-blocks')}
+                                value={selectedSize}
+                                options={imageSizes.map((size) => ({ label: size, value: size }))}
+                                onChange={(newSelectedSize) => setAttributes({ selectedSize: newSelectedSize })}
+                            />
+
+                            <RangeControl
+                                label={__('Video Thumbnail Border Radius', 'video-lightbox-for-guten-blocks')}
+                                value={attributes.videoThumbnailBorderRadius}
+                                onChange={handleVideoThumbnailBorderRadius}
+                                min={0}
+                                max={30}
+                                step={2}
+                            />
                         </PanelBody>
                     )}
 
