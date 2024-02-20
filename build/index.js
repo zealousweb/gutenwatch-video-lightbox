@@ -495,7 +495,8 @@ function Edit({
     onSelect: onUploadVideo,
     type: "video",
     value: attributes.video,
-    allowedTypes: ['video'],
+    allowedTypes: ['video/*'] // Allows all video formats
+    ,
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
