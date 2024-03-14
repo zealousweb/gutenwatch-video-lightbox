@@ -47,7 +47,6 @@ export default function Edit({ attributes, setAttributes }) {
         buttonBorderRadius,
         videoThumbnailBorderRadius,
         blockClass,
-        text_color
     } = attributes;
 
     /** get thumbnail image sizes from wordpress */
@@ -226,9 +225,12 @@ export default function Edit({ attributes, setAttributes }) {
         background-color: ${buttonBackgroundHoverColor} !important;
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
-      }  
+      }        
       .video-thumbnail.${blockClass} {
         border-radius: ${videoThumbnailBorderRadius}px !important;
+      }
+      .input-${blockClass} input.components-text-control__input {
+        border-radius: ${buttonBorderRadius}px !important;
       }
       /* Add more styles as needed */
     `;
@@ -236,7 +238,7 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <div className="video-lightbox" >
             {
-                <style>
+                <style type="text/css">
                     {customStyles}
                 </style>
             }
@@ -391,7 +393,7 @@ export default function Edit({ attributes, setAttributes }) {
                             selected={attributes.videoType}
                             options={[
                                 { label: 'Upload Video', value: 'uploadvideo' },
-                                { label: 'Video Url', value: 'videourl' },
+                                { label: 'Video URL', value: 'videourl' },
                             ]}
                             onChange={handleVideoTypeChange}
                         />
@@ -492,6 +494,7 @@ export default function Edit({ attributes, setAttributes }) {
                         <TextControl
                             label={__('Update Button Text', 'video-lightbox-for-guten-blocks')}
                             value={attributes.buttonText}
+                            className={`input-${blockClass}`}
                             onChange={handleTextChange}
                             placeholder={__('Play Video', 'video-lightbox-for-guten-blocks')}
                         />
@@ -529,7 +532,7 @@ export default function Edit({ attributes, setAttributes }) {
                                         ) : (
                                             <Button className={`vl-button vl-icon-text-button ${blockClass}`} onClick={open}>
                                                 <svg viewBox="0 0 24 24" width="24" ><g> <rect x="0" fill="none" width="24" height="24"></rect> <g> <path d="M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"></path> </g> </g></svg>
-                                                {__('upload Image', 'video-lightbox-for-guten-blocks')}
+                                                {__('Upload Video Thumbnail', 'video-lightbox-for-guten-blocks')}
                                             </Button>
                                         )}
                                     </>

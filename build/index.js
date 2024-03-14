@@ -73,8 +73,7 @@ function Edit({
     buttonTextHoverColor,
     buttonBorderRadius,
     videoThumbnailBorderRadius,
-    blockClass,
-    text_color
+    blockClass
   } = attributes;
 
   /** get thumbnail image sizes from wordpress */
@@ -302,15 +301,20 @@ function Edit({
         background-color: ${buttonBackgroundHoverColor} !important;
         color: ${buttonTextHoverColor} !important;
         border: ${buttonBorderWidth}px solid ${buttonBorderHoverColor} !important;
-      }  
+      }        
       .video-thumbnail.${blockClass} {
         border-radius: ${videoThumbnailBorderRadius}px !important;
+      }
+      .input-${blockClass} input.components-text-control__input {
+        border-radius: ${buttonBorderRadius}px !important;
       }
       /* Add more styles as needed */
     `;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "video-lightbox"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
+    type: "text/css"
+  }, customStyles), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "video-lb-notes"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Option for Video Popup', 'video-lightbox-for-guten-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('* Please find Video upload, and customization options in sidebar', 'video-lightbox-for-guten-blocks'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl
   //label={__('Select Option for Video Popup')}
@@ -458,7 +462,7 @@ function Edit({
       label: 'Upload Video',
       value: 'uploadvideo'
     }, {
-      label: 'Video Url',
+      label: 'Video URL',
       value: 'videourl'
     }],
     onChange: handleVideoTypeChange
@@ -551,6 +555,7 @@ function Edit({
   }, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Update Button Text', 'video-lightbox-for-guten-blocks'),
     value: attributes.buttonText,
+    className: `input-${blockClass}`,
     onChange: handleTextChange,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Play Video', 'video-lightbox-for-guten-blocks')
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
@@ -627,7 +632,7 @@ function Edit({
       height: "24"
     }), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"
-    }), " "), " ")), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('upload Image', 'video-lightbox-for-guten-blocks')))
+    }), " "), " ")), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload Video Thumbnail', 'video-lightbox-for-guten-blocks')))
   })))));
 }
 
