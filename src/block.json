@@ -25,7 +25,7 @@
         },
         "buttonBackgroundColor": {
             "type": "string",
-            "default": "#0073aa"
+            "default": "var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9))"
         },
         "buttonTextColor": {
             "type": "string",
@@ -33,11 +33,11 @@
         },
         "buttonBorderColor": {
             "type": "string",
-            "default": "#0073aa"
+            "default": "var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9))"
         },
         "buttonBackgroundHoverColor": {
             "type": "string",
-            "default": "#0073aa"
+            "default": "var(--wp-components-color-accent-darker-10,var(--wp-admin-theme-color-darker-10, #2145e6))"
         },
         "buttonTextHoverColor": {
             "type": "string",
@@ -45,7 +45,7 @@
         },
         "buttonBorderHoverColor": {
             "type": "string",
-            "default": "#0073aa"
+            "default": "var(--wp-components-color-accent-darker-10,var(--wp-admin-theme-color-darker-10, #2145e6))"
         },
         "buttonBorderWidth": {
             "type": "number",
@@ -69,7 +69,7 @@
         },
         "videoLightboxColor": {
             "type": "string",
-            "default": "#000000"
+            "default": "var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9))"
         },
         "videoLightboxOpacity": {
             "type": "number",
