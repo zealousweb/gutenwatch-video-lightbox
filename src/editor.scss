@@ -29,7 +29,9 @@
 		}*/
 	}
 	.components-button {
-		background-color: #3858e9;
+		border-color: #0073aa;
+		background-color: #0073aa;
+		color: #ffffff;
 	}
 
 	.video-lb-notes {
@@ -40,34 +42,34 @@
 		text-align: center;
 		background-color: var(
 			--wp-components-color-accent,
-			var(--wp-admin-theme-color, #3858e9)
+			var(--wp-admin-theme-color, #0073aa)
 		);
 		p {
-            margin: 0;
+			margin: 0;
 			font-size: 14px;
 			font-style: italic;
-            color: #fff;
+			color: #fff;
 		}
 		h2 {
-            font-size: 20px !important;
+			font-size: 20px !important;
 			margin: 0;
-            color: #fff;
+			color: #fff;
 		}
 	}
-    .play-icon {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
+	.play-icon {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
 }
 
 .video-thumbnail {
 	position: relative;
 	background-color: #fff;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .video-lightbox .components-radio-control .components-flex {
-    gap: 10px;
+	gap: 10px;
 }

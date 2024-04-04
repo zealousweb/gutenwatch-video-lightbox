@@ -1,12 +1,14 @@
 === Video Lightbox For Guten Blocks ===
 Contributors:      zealopensource
 Tags:              Video Popup, Video Lightbox, Gutenberg
-Tested up to:      6.4
-Requires PHP:      7.4
-Requires at least: 6.1
-Stable tag:        1.0
-License:           GPL-3.0-or-later
-License URI:       http://www.gnu.org/licenses/gpl-3.0.html
+Donate link: http://www.zealousweb.com/payment/
+Requires at least: 5.9
+Tested up to: 6.4.2
+Requires PHP: 7.4
+Version: 1.0.0
+Stable tag: 1.0.0
+License: GPLv3 or later License
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Enhance your WordPress website with the "Video Lightbox for Gutenberg Blocks" plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.
 
@@ -16,12 +18,12 @@ This plugin simplifies the process of embedding and showcasing videos on your si
 
 Video Lightbox for Guten Blocks is a user-friendly WordPress plugin that seamlessly integrates into the Gutenberg editor, allowing users to effortlessly create visually stunning Video Popups. With flexible customization options, this plugin enhances the overall design and engagement of your content, offering an easy and effective way to showcase video within your website.
 
-* Display video in popup using button or image layout.
-* Lightbox functionality for image and video to provide a larger view when clicked.
-* Support various video formats, including MP4, YouTube and Vimeo etc.
-* Provide the option to upload image & click to open Video Popup with PlayIcon image.
-* Customize the appearance of button option, including colors, border, and textcolor.
-* Customize the appearance of lightbox Video width, background color & opacity.
+- Display video in popup using button or image layout.
+- Lightbox functionality for image and video to provide a larger view when clicked.
+- Support various video formats, including MP4, YouTube and Vimeo etc.
+- Provide the option to upload image & click to open Video Popup with PlayIcon image.
+- Customize the appearance of button option, including colors, border, and textcolor.
+- Customize the appearance of lightbox Video width, background color & opacity.
 
 == Installation ==
 
@@ -40,6 +42,10 @@ e.g.
 1. Upload the plugin files to the `/wp-content/plugins/video-lightbox-for-guten-blocks` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
+== Plugin Requirement ==
+
+PHP version : 7.4 or latest
+WordPress   : WordPress 5.9 or latest
 
 == Frequently Asked Questions ==
 
@@ -62,6 +68,13 @@ If you want to add custom Css for Button you can do it but plugin already have B
 = Can I Change the size of Video Thumbnail image? =
 
 Its simple Go to Video Type Settings Video Thumbnail size Dropdown in sidebar then choose your option.
+
+## Functionality
+
+This plugin utilizes third-party libraries to enhance its functionality:
+
+- **Fancybox JS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js - Use to achive lightbox functionality for videos in popup
+- **Fancybox CSS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css - Use to achive lightbox functionality for videos in popup
 
 == Screenshots ==
 
@@ -94,5 +107,9 @@ video-lightbox-frontend-backcolor.png
 == Changelog ==
 
 = 1.0.0 =
-* Release
+Initial Release
+
+== Upgrade Notice ==
+
+= 1.0.0 =
 Initial Release

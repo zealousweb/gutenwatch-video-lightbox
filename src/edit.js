@@ -34,8 +34,9 @@ import './editor.scss';
  */
 export default function Edit({ attributes, setAttributes }) {
 
-
+    /** Constant values to contain default values */
     const {
+        blockClass,
         selectedSize,
         buttonBorderWidth,
         buttonBorderColor,
@@ -45,20 +46,18 @@ export default function Edit({ attributes, setAttributes }) {
         buttonTextColor,
         buttonTextHoverColor,
         buttonBorderRadius,
-        videoThumbnailBorderRadius,
-        blockClass,
+        videoThumbnailBorderRadius        
     } = attributes;
 
     /** get thumbnail image sizes from wordpress */
     const imageSizes = select('core/editor').getEditorSettings().imageSizes.map((size) => size.slug);
 
+    /** Unique Block Class Random generation if blank */
     if ( blockClass === '' ){
         setAttributes({
             blockClass: Math.random().toString(36).substring(7)
         });
     }
-
-
 
     /** Constant values to contain default values */
     const onSelectImage = (image) => {
@@ -195,14 +194,14 @@ export default function Edit({ attributes, setAttributes }) {
         setAttributes({ video: '' });
     };
 
-    const onChangeTextColor = (hexColor) => {
-        setAttributes({ text_color: hexColor });
-    };
+    // const onChangeTextColor = (hexColor) => {
+    //     setAttributes({ text_color: hexColor });
+    // };
 
-    const generateRandomId = () => {
-        const blockId = Math.random().toString(36).substring(7);
-        setAttributes({ blockClass: `button-id-${blockId}` });
-    };
+    // const generateRandomId = () => {
+    //     const blockId = Math.random().toString(36).substring(7);
+    //     setAttributes({ blockClass: `button-id-${blockId}` });
+    // };
 
     //generateRandomId();
 
@@ -242,12 +241,14 @@ export default function Edit({ attributes, setAttributes }) {
                     {customStyles}
                 </style>
             }
+            {/** Main UI instuctions */}
             <div className="video-lb-notes">
-                <h2>{__('Select Option for Video Popup', 'video-lightbox-for-guten-blocks')}</h2>
-                <p>{__('* Please find Video upload, and customization options in sidebar', 'video-lightbox-for-guten-blocks')}</p>
+                <h2>{__('Video Popup Options', 'video-lightbox-for-guten-blocks')}</h2>
+                <p>{__('* Choose your video and adjust the settings in the sidebar.', 'video-lightbox-for-guten-blocks')}</p>
             </div>
+
+            {/** Main Selection Button or Media Thumbnail for Video Popup */}
             <RadioControl
-                //label={__('Select Option for Video Popup')}
                 selected={attributes.selection}
                 options={[
                     { label: __('Button', 'video-lightbox-for-guten-blocks'), value: 'button' },
@@ -257,6 +258,8 @@ export default function Edit({ attributes, setAttributes }) {
             />
 
             <InspectorControls>
+
+                {/** Main Button Customization Panel */}
                 <Panel>
                     <PanelBody title={__('Button Design', 'video-lightbox-for-guten-blocks')}>
                         <RangeControl
@@ -318,6 +321,7 @@ export default function Edit({ attributes, setAttributes }) {
                         </PanelBody>
                     )*/}
 
+                    {/**  */}
                     {attributes.selection === 'media' && (
                         <PanelBody title={__('Play Icon Settings', 'video-lightbox-for-guten-blocks')}>
                             <ToggleControl

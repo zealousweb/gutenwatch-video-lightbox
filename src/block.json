@@ -7,6 +7,10 @@
 	"icon": "video-alt3",
 	"description": "Enhance your WordPress website with the Video Lightbox for Gutenberg Blocks plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.",
     "attributes": {
+        "blockClass": {
+            "type": "string",
+            "default": ""
+        },
         "image": {
             "type": "object",
             "default": null
@@ -102,11 +106,7 @@
         "text_color": {
             "type": "string",
             "default": null
-        },
-        "blockClass": {
-            "type": "string",
-            "default": ""
-        }
+        }        
     },
 	"textdomain": "video-lightbox-for-guten-blocks",
 	"editorScript": "file:./index.js",

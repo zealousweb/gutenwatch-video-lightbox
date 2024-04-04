@@ -30,7 +30,9 @@
   }*/
 }
 .video-lightbox .components-button {
-  background-color: #3858e9;
+  border-color: #0073aa;
+  background-color: #0073aa;
+  color: #ffffff;
 }
 .video-lightbox .video-lb-notes {
   width: 100%;
@@ -38,7 +40,7 @@
   text-align: center;
   font-weight: 400;
   text-align: center;
-  background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #0073aa));
 }
 .video-lightbox .video-lb-notes p {
   margin: 0;
