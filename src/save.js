@@ -25,7 +25,32 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function save( {attributes} ) {
 
     /** Get constant values contains values to save */
-    const { blockClass, selection, image, buttonText, buttonBorderWidth, buttonBackgroundColor, buttonBackgroundHoverColor, buttonTextHoverColor, buttonBorderHoverColor, videoLightboxWidth, videoLightboxColor, buttonTextColor, buttonBorderColor, buttonBorderRadius, videoThumbnailBorderRadius, videoType, videoUrl, video, playIconEnabled, playIconImage, playIconImageSize, imageSize, selectedSize, videoLightboxOpacity } = attributes;
+    const {
+        blockClass,
+        selection,
+        image,
+        buttonText,
+        buttonBorderWidth,
+        buttonBackgroundColor,
+        buttonBackgroundHoverColor,
+        buttonTextHoverColor,
+        buttonBorderHoverColor,
+        videoLightboxWidth,
+        videoLightboxColor,
+        buttonTextColor,
+        buttonBorderColor,
+        buttonBorderRadius,
+        videoThumbnailBorderRadius,
+        videoType,
+        videoUrl,
+        video,
+        playIconEnabled,
+        playIconImage,
+        playIconImageSize,
+        imageSize,
+        selectedSize,
+        videoLightboxOpacity
+    } = attributes;
     const buttonContent = buttonText.trim() !== '' ? buttonText : 'Open Video';
 
     function isValidHttpUrl(str) {

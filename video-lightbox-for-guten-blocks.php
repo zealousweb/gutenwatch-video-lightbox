@@ -2,15 +2,20 @@
 /**
  * Plugin Name:       Video Lightbox For Guten Blocks
  * Description:       Enhance your WordPress website with the "Video Lightbox for Gutenberg Blocks" plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.
- * Requires at least: 6.1
+ * Requires at least: 5.9
  * Requires PHP:      7.4
  * Version:           1.0.0
  * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
- * License:           GPL-3.0-or-later
+ * License:           GPLv3 or later License
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       video-lightbox-for-guten-blocks
+ * Text Domain:       grid-masonry-for-guten-blocks
  *
- * @package           create-block
+ * @category  ZealBlocks
+ * @package   Video-Lightbox-for-Guten-Blocks
+ * @author    ZealousWeb <support@zealousweb.com>
+ * @copyright 2024 ZealousWeb
+ * @license   GPLv3 or later License
+ * @link      http://www.gnu.org/licenses/gpl-3.0.html
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
