@@ -6,16 +6,16 @@
  * Requires PHP:      7.4
  * Version:           1.0.0
  * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
- * License:           GPLv3 or later License
- * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       grid-masonry-for-guten-blocks
+ * License:           GNU General Public License v3.0 or later
+ * License URI:       https://spdx.org/licenses/GPL-3.0-or-later.html
+ * Text Domain:       video-lightbox-for-guten-blocks
  *
  * @category  ZealBlocks
  * @package   Video-Lightbox-for-Guten-Blocks
  * @author    ZealousWeb <support@zealousweb.com>
  * @copyright 2024 ZealousWeb
- * @license   GPLv3 or later License
- * @link      http://www.gnu.org/licenses/gpl-3.0.html
+ * @license   GNU General Public License v3.0 or later
+ * @link      https://spdx.org/licenses/GPL-3.0-or-later.html
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

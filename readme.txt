@@ -7,12 +7,10 @@ Tested up to: 6.4.2
 Requires PHP: 7.4
 Version: 1.0.0
 Stable tag: 1.0.0
-License: GPLv3 or later License
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GNU General Public License v3.0 or later
+License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
 
-Enhance your WordPress website with the "Video Lightbox for Gutenberg Blocks" plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.
-
-This plugin simplifies the process of embedding and showcasing videos on your site by introducing an intuitive lightbox feature. With a user-friendly interface, you can effortlessly add video content to your posts and pages using native Gutenberg blocks, all while providing a sleek and interactive viewing experience for your audience.
+Elevate WordPress with "Video Lightbox for Guten Blocks". Streamline video embedding effortlessly for engaging content.
 
 == Description ==
 
