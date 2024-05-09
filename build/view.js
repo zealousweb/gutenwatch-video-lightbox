@@ -35,27 +35,27 @@ $(() => {
     $this = jQuery(this);
     $datafancyclass = jQuery(this).attr('data-fancy-class');
     console.log($datafancyclass);
-    Fancybox.bind('[data-fancybox="video-lightbox-' + $datafancyclass + '"]', {
-      mainClass: `video-lightbox-fancy ` + $datafancyclass + '-fancy-custom'
+    Fancybox.bind('[data-fancybox="zwt-vlfgb-' + $datafancyclass + '"]', {
+      mainClass: `zwt-vlfgb-fancy ` + $datafancyclass + '-fancy-custom'
     });
     // jQuery(".vl-button ." + $datafancyclass).fancybox({
     //     mainClass: $datafancyclass + '-fancy-custom'
     //     // Add other options as needed
     // });
-    // Fancybox.bind(['data-fancybox="video-lightbox-' + $datafancyclass + '"'] , {
-    //     mainClass: `video-lightbox-fancy ` + $datafancyclass + '-fancy-custom',
+    // Fancybox.bind(['data-fancybox="zwt-vlfgb-' + $datafancyclass + '"'] , {
+    //     mainClass: `zwt-vlfgb-fancy ` + $datafancyclass + '-fancy-custom',
     // });
     // var galleryId = $(this).data("fancybox");
     // $(this).find("a").attr("data-fancybox", galleryId);
   });
 
   // $(document).on('click', '.vl-button', function(){
-  //     
+  //
   // });
 
   /** Fancybox bindings for Media Grid */
   // Fancybox.bind('[data-fancybox]', {
-  // mainClass: `video-lightbox-fancy`,
+  // mainClass: `zwt-vlfgb-fancy`,
   // });
 });
 /* eslint-enable no-console */

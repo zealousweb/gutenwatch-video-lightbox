@@ -46,7 +46,7 @@ export default function Edit({ attributes, setAttributes }) {
         buttonTextColor,
         buttonTextHoverColor,
         buttonBorderRadius,
-        videoThumbnailBorderRadius        
+        videoThumbnailBorderRadius
     } = attributes;
 
     /** get thumbnail image sizes from wordpress */
@@ -235,11 +235,11 @@ export default function Edit({ attributes, setAttributes }) {
     `;
 
     {/**
-         
+
     */}
 
     return (
-        <div className={`video-lightbox ${blockClass}-main`}>
+        <div className={`zwt-vlfgb ${blockClass}-main`}>
             {
                 <style type="text/css">
                     {customStyles}
@@ -262,7 +262,7 @@ export default function Edit({ attributes, setAttributes }) {
             />
 
             <InspectorControls>
-                
+
                 {/** Main Button Customization Panel */}
                 <Panel className="vlfgb-panel">
                     {attributes.selection === 'button' && (
@@ -320,11 +320,11 @@ export default function Edit({ attributes, setAttributes }) {
                                         label: __('Border Hover Color', 'video-lightbox-for-guten-blocks'),
                                     },
                                 ]}
-                            />                            
+                            />
                         </>
                     )}
-                    
-                    
+
+
                     {/*attributes.selection === 'button' && (
                         <PanelBody title={__('Button Settings', 'video-lightbox-for-guten-blocks')}>
 
@@ -380,7 +380,7 @@ export default function Edit({ attributes, setAttributes }) {
                                         min={0}
                                         max={100}
                                         step={2}
-                                    />					
+                                    />
                                 </div>
                             )}
                             <SelectControl
@@ -531,7 +531,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 render={({ open }) => (
                                     <>
                                         {attributes.image ? (
-                                            <div className={`video-thumbnail ${blockClass}`}> 
+                                            <div className={`video-thumbnail ${blockClass}`}>
                                                 <img src={attributes.image.sizes[selectedSize].url} alt={(attributes.image.alt ? attributes.image.alt : '')} />
                                                 {attributes.playIconEnabled && attributes.playIconImage ? (
                                                     <div><img src={attributes.playIconImage} width={attributes.playIconImageSize} alt={__('Play Icon', 'video-lightbox-for-guten-blocks')} className="play-icon" /></div>

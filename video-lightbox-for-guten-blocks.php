@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if (!defined('VIDEO_LIGHTBOX_VERSION')) {
-    define('VIDEO_LIGHTBOX_VERSION', time());
+if (!defined('ZWT_VLFGB_VERSION')) {
+    define('ZWT_VLFGB_VERSION', time());
 }
 
 
@@ -32,10 +32,10 @@ if (!defined('VIDEO_LIGHTBOX_VERSION')) {
  *
  * @return void
  */
-function Video_Lightbox_For_Gutenberg_Block_init(){
+function ZWT_VLFGB_init(){
 
     wp_enqueue_script(
-        'video-lightbox-fancybox-library-js',
+        'zwt-vlfgb-fancybox-library-js',
         plugins_url('/assets/js/fancybox.umd.js', __FILE__),
         array('jquery'),
         '5.0.24',
@@ -43,7 +43,7 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
     );
 
     wp_enqueue_style(
-        'video-lightbox-fancybox-liblibrary-css',
+        'zwt-vlfgb-fancybox-liblibrary-css',
         plugins_url('/assets/css/fancybox.css', __FILE__),
         '',
         '5.0.24',
@@ -51,15 +51,15 @@ function Video_Lightbox_For_Gutenberg_Block_init(){
     );
 
     // wp_enqueue_script(
-    //     'video-lightbox-custom-js',
+    //     'zwt-vlfgb-custom-js',
     //     plugins_url('/assets/js/scripts.js', __FILE__),
-    //     array('jquery', 'video-lightbox-fancybox-library-js'),
+    //     array('jquery', 'zwt-vlfgb-fancybox-library-js'),
     //     '',
     //     false
     // );
 }
 
-add_action('init', 'Video_Lightbox_For_Gutenberg_Block_init');
+add_action('init', 'ZWT_VLFGB_init');
 
 /**
  * Category Creation function
@@ -68,7 +68,7 @@ add_action('init', 'Video_Lightbox_For_Gutenberg_Block_init');
  *
  * @return mixed Return description.
  */
-function VideoLightbox_Plugin_Block_Categories( $categories )
+function ZWT_VLFGB_Categories( $categories )
 {
     if (array_search('zealblocks', array_column($categories, 'slug'), true) === false) {
         return array_merge(
@@ -84,7 +84,7 @@ function VideoLightbox_Plugin_Block_Categories( $categories )
     }
     return $categories;
 }
-add_action('block_categories_all', 'VideoLightbox_Plugin_Block_Categories', 10, 2);
+add_action('block_categories_all', 'ZWT_VLFGB_Categories', 10, 2);
 
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
@@ -93,11 +93,11 @@ add_action('block_categories_all', 'VideoLightbox_Plugin_Block_Categories', 10, 
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init() {
+function ZWT_VLFGB_VLFGB_init() {
     if ( ! function_exists( 'register_block_type' ) ) {
         // Block editor is not available.
         return;
     }
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'video_lightbox_for_guten_blocks_video_lightbox_for_guten_blocks_block_init' );
+add_action( 'init', 'ZWT_VLFGB_VLFGB_init' );
