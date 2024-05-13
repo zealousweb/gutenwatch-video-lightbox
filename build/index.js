@@ -83,7 +83,7 @@ function Edit({
   /** Unique Block Class Random generation if blank */
   if (blockClass === '') {
     setAttributes({
-      blockClass: 'bc' + Math.random().toString(36).substring(7)
+      blockClass: 'zwt-vlfgb-bc' + Math.random().toString(36).substring(7)
     });
   }
 
@@ -293,10 +293,10 @@ function Edit({
    */
   const customStyles = `
     .${blockClass}-main .components-button {
-        background-color: ${buttonBackgroundColor} !important;
-        color: ${buttonTextColor} !important;
-        border: ${buttonBorderWidth}px solid ${buttonBorderColor} !important;
-        border-radius: ${buttonBorderRadius}px !important;
+        background-color: ${buttonBackgroundColor};
+        color: ${buttonTextColor};
+        border: ${buttonBorderWidth}px solid ${buttonBorderColor};
+        border-radius: ${buttonBorderRadius}px;
       }
       .${blockClass}-main .components-button:hover {
         background-color: ${buttonBackgroundHoverColor} !important;
@@ -312,7 +312,7 @@ function Edit({
       /* Add more styles as needed */
     `;
   {/**
-   */}
+    */}
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `zwt-vlfgb ${blockClass}-main`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
@@ -330,7 +330,7 @@ function Edit({
     }],
     onChange: handleSelectionChange
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-    className: "vlfgb-panel"
+    className: "zwt-vlfgb-panel"
   }, attributes.selection === 'button' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Button Design', 'video-lightbox-for-guten-blocks')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
@@ -390,9 +390,11 @@ function Edit({
     className: `vl-button vl-icon-button`,
     onClick: removeIcon
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    viewBox: "0 0 24 24"
+    viewBox: "0 0 24 24",
+    width: "24"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M13 4H8.8C7.11984 4 6.27976 4 5.63803 4.32698C5.07354 4.6146 4.6146 5.07354 4.32698 5.63803C4 6.27976 4 7.11984 4 8.8V15.2C4 16.8802 4 17.7202 4.32698 18.362C4.6146 18.9265 5.07354 19.3854 5.63803 19.673C6.27976 20 7.11984 20 8.8 20H15.2C16.8802 20 17.7202 20 18.362 19.673C18.9265 19.3854 19.3854 18.9265 19.673 18.362C20 17.7202 20 16.8802 20 15.2V11",
+    fill: "transparent",
     stroke: "currentColor",
     "stroke-width": "2",
     "stroke-linecap": "round",
@@ -424,12 +426,12 @@ function Edit({
       onClick: open,
       "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload Icon', 'video-lightbox-for-guten-blocks')
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-      viewBox: "0 0 24 24"
+      viewBox: "0 0 24 24",
+      fill: "transparent",
+      width: "24"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
       x: "0",
-      fill: "none",
-      width: "24",
-      height: "24"
+      fill: "none"
     }), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"
     }), " "), " ")), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload Icon', 'video-lightbox-for-guten-blocks')))
@@ -483,7 +485,8 @@ function Edit({
     className: `vl-button vl-icon-button`,
     onClick: removeVideo
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    viewBox: "0 0 24 24"
+    viewBox: "0 0 24 24",
+    width: "24"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M21.98 15.67C21.94 15.61 21.89 15.55 21.84 15.5C21.03 14.57 19.83 14 18.5 14C17.24 14 16.09 14.52 15.27 15.36C14.48 16.17 14 17.28 14 18.5C14 19.34 14.24 20.14 14.65 20.82C14.88 21.2 15.17 21.55 15.51 21.84C15.56 21.89 15.61 21.93 15.67 21.98C15.67 21.98 15.67 21.98 15.68 21.98C16.44 22.62 17.42 23 18.5 23C20.14 23 21.57 22.12 22.35 20.82C22.58 20.43 22.76 20 22.87 19.55C22.96 19.21 23 18.86 23 18.5C23 17.43 22.62 16.44 21.98 15.67ZM20.23 20.21C20.08 20.36 19.89 20.43 19.7 20.43C19.51 20.43 19.32 20.36 19.17 20.21L18.51 19.55L17.82 20.24C17.67 20.39 17.48 20.46 17.29 20.46C17.1 20.46 16.91 20.39 16.76 20.24C16.47 19.95 16.47 19.47 16.76 19.18L17.45 18.49L16.79 17.83C16.5 17.54 16.5 17.06 16.79 16.77C17.08 16.48 17.56 16.48 17.85 16.77L18.51 17.43L19.14 16.8C19.43 16.51 19.91 16.51 20.2 16.8C20.49 17.09 20.49 17.57 20.2 17.86L19.57 18.49L20.23 19.15C20.53 19.44 20.53 19.91 20.23 20.21Z",
     fill: "currentColor"
@@ -512,6 +515,8 @@ function Edit({
       onClick: open
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
+      width: "24",
+      height: "24",
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
@@ -591,6 +596,7 @@ function Edit({
       className: "play-icon"
     })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
+      fill: "transparent",
       width: attributes.playIconImageSize,
       className: "play-icon"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
@@ -603,7 +609,8 @@ function Edit({
       onClick: removeImage
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
-      fill: "none"
+      fill: "transparent",
+      width: "24"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M13 4H8.8C7.11984 4 6.27976 4 5.63803 4.32698C5.07354 4.6146 4.6146 5.07354 4.32698 5.63803C4 6.27976 4 7.11984 4 8.8V15.2C4 16.8802 4 17.7202 4.32698 18.362C4.6146 18.9265 5.07354 19.3854 5.63803 19.673C6.27976 20 7.11984 20 8.8 20H15.2C16.8802 20 17.7202 20 18.362 19.673C18.9265 19.3854 19.3854 18.9265 19.673 18.362C20 17.7202 20 16.8802 20 15.2V11",
       stroke: "currentColor",
@@ -627,12 +634,12 @@ function Edit({
       onClick: open
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 24 24",
-      width: "24"
+      width: "24",
+      height: "24",
+      fill: "transparent"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
       x: "0",
-      fill: "none",
-      width: "24",
-      height: "24"
+      fill: "transparent"
     }), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"
     }), " "), " ")), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Upload Video Thumbnail', 'video-lightbox-for-guten-blocks')))
@@ -812,7 +819,7 @@ function save({
     (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save()
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, customStyles), attributes.selection === 'button' && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      "data-fancybox": `zwt-vlfgb-${blockClass}`,
+      "data-fancybox": `zwt-vlfgb ${blockClass}`,
       "data-fancy-class": blockClass,
       href: attributes.videoUrl || attributes.video,
       className: `vl-button vl-icon-text-button ${blockClass}`
@@ -825,7 +832,7 @@ function save({
       d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM10.6935 15.8458L15.4137 13.059C16.1954 12.5974 16.1954 11.4026 15.4137 10.941L10.6935 8.15419C9.93371 7.70561 9 8.28947 9 9.21316V14.7868C9 15.7105 9.93371 16.2944 10.6935 15.8458Z",
       fill: "currentColor"
     }), " ")), buttonContent)) : attributes.selection === 'media' && selectedSize && image && (isValidHttpUrl(attributes.videoUrl) || attributes.video) && (videoType === 'videourl' || videoType === 'uploadvideo') && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      "data-fancybox": `zwt-vlfgb-${blockClass}`,
+      "data-fancybox": `zwt-vlfgb ${blockClass}`,
       "data-fancy-class": blockClass,
       href: attributes.videoUrl || attributes.video,
       class: `video-thumbnail ${blockClass}`

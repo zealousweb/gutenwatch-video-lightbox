@@ -57,6 +57,17 @@ function ZWT_VLFGB_init(){
     //     '',
     //     false
     // );
+
+    /** Custom Plugin Style */
+    wp_enqueue_style(
+        'front-styles',
+        plugins_url('/build/style-index.css', __FILE__),
+        ZWT_VLFGB_VERSION,
+        true
+    );
+    
+    /** Register Block */
+    register_block_type(__DIR__ . '/build');
 }
 
 add_action('init', 'ZWT_VLFGB_init');
@@ -85,19 +96,3 @@ function ZWT_VLFGB_Categories( $categories )
     return $categories;
 }
 add_action('block_categories_all', 'ZWT_VLFGB_Categories', 10, 2);
-
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-function ZWT_VLFGB_VLFGB_init() {
-    if ( ! function_exists( 'register_block_type' ) ) {
-        // Block editor is not available.
-        return;
-    }
-	register_block_type( __DIR__ . '/build' );
-}
-add_action( 'init', 'ZWT_VLFGB_VLFGB_init' );
