@@ -31,8 +31,8 @@ $(() => {
     jQuery("[data-fancybox]").each(function () {
         $this = jQuery(this);
         $datafancyclass = jQuery(this).attr('data-fancy-class');
-        console.log($datafancyclass);
-        Fancybox.bind('[data-fancybox=" zwt-vlfgb-' + $datafancyclass + '"]', {
+        console.log('data' + $datafancyclass);
+        Fancybox.bind('[data-fancybox="' + $datafancyclass + '"]', {
             mainClass: `zwt-vlfgb-fancy ` + $datafancyclass + '-fancy-custom',
         });
         // jQuery(".vl-button ." + $datafancyclass).fancybox({
