@@ -798,6 +798,7 @@ function save({
       .${blockClass}-fancy-custom .fancybox__content {
         max-width: ${videoLightboxWidth}px;
         width: 100% !important;
+        outline:none;
       }
       .${blockClass}{
         background-color: ${buttonBackgroundColor} !important;
