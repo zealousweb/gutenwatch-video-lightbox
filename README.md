@@ -1,18 +1,8 @@
-=== Video Lightbox For Guten Blocks ===
-Contributors:      zealopensource
-Tags:              Video Popup, Video Lightbox, Gutenberg
-Donate link: http://www.zealousweb.com/payment/
-Requires at least: 5.9
-Tested up to: 6.6
-Requires PHP: 7.4
-Version: 1.0.1
-Stable tag: 1.0.1
-License: GNU General Public License v3.0 or later
-License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
+# Video Lightbox For Guten Blocks
 
 Elevate WordPress with "Video Lightbox for Guten Blocks". Streamline video embedding effortlessly for engaging content.
 
-== Description ==
+**Description**
 
 Video Lightbox for Guten Blocks is a user-friendly WordPress plugin that seamlessly integrates into the Gutenberg editor, allowing users to effortlessly create visually stunning Video Popups. With flexible customization options, this plugin enhances the overall design and engagement of your content, offering an easy and effective way to showcase video within your website.
 
@@ -23,7 +13,7 @@ Video Lightbox for Guten Blocks is a user-friendly WordPress plugin that seamles
 - Customize the appearance of button option, including colors, border, and textcolor.
 - Customize the appearance of lightbox Video width, background color & opacity.
 
-== Installation ==
+**Installation**
 
 Installing the plugin is easy. Just follow these steps:
 
@@ -45,9 +35,9 @@ e.g.
 PHP version : 7.4 or latest
 WordPress   : WordPress 5.9 or latest
 
-== Frequently Asked Questions ==
+**Frequently Asked Questions**
 
-= How to integrate Video Lightbox? =
+**How to integrate Video Lightbox?**
 
 1. Add a new post or page.
 2. Click on the "+" icon to add a new block.
@@ -55,15 +45,15 @@ WordPress   : WordPress 5.9 or latest
 4. Configure the block settings, including Upload Media, Button settings, Video Lightbox options, etc.
 5. Publish or update your post/page to see the Video Lightbox in action.
 
-= Can I customize the appearance of the Popup? =
+**Can I customize the appearance of the Popup?**
 
 Yes, you can easily change popup background color & popup width in Video Lightbox Settings.
 
-= Can I customize the appearance of Button or Can I add Custom Css for Button? =
+**Can I customize the appearance of Button or Can I add Custom Css for Button?**
 
 If you want to add custom Css for Button you can do it but plugin already have Button Settings for that,
 
-= Can I Change the size of Video Thumbnail image? =
+**Can I Change the size of Video Thumbnail image?**
 
 Its simple Go to Video Type Settings Video Thumbnail size Dropdown in sidebar then choose your option.
 
