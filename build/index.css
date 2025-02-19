@@ -6,8 +6,92 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-gutenwatch-video-lightbox {
-  border: 1px dotted #f00;
+.zwt-vlfgb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+.zwt-vlfgb .media-block,
+.zwt-vlfgb .components-radio-control {
+  padding: 20px;
+  /*.components-flex {
+  	display: flex;
+  	align-items: center;
+  	justify-content: flex-start;
+  	flex-wrap: nowrap;
+  	flex-direction: row;
+  	gap: 12px;
+  	margin-bottom: 12px;
+  }*/
+}
+.zwt-vlfgb .components-button {
+  border-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  color: #ffffff;
+}
+.zwt-vlfgb .components-button:hover {
+  border-color: var(--wp-components-color-accent-darker-10, var(--wp-admin-theme-color-darker-10, #2145e6));
+  background-color: var(--wp-components-color-accent-darker-10, var(--wp-admin-theme-color-darker-10, #2145e6));
+  color: #ffffff;
+}
+.zwt-vlfgb .video-lb-notes {
+  width: 100%;
+  padding: 3px 5px;
+  text-align: center;
+  font-weight: 400;
+  text-align: center;
+  background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #0073aa));
+}
+.zwt-vlfgb .video-lb-notes p {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+  color: #fff;
+}
+.zwt-vlfgb .video-lb-notes h2 {
+  font-size: 20px !important;
+  margin: 0;
+  color: #fff;
+}
+.zwt-vlfgb .play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.video-thumbnail {
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+}
+.video-thumbnail .components-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+.video-thumbnail .components-button svg {
+  fill: transparent !important;
+}
+
+.zwt-vlfgb .components-radio-control .components-flex {
+  gap: 10px;
+}
+
+.zwt-vlfgb-panel .components-button.vl-button {
+  border-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  color: #ffffff;
+}
+.zwt-vlfgb-panel .components-button.vl-button:hover {
+  border-color: var(--wp-components-color-accent-darker-10, var(--wp-admin-theme-color-darker-10, #2145e6));
+  background-color: var(--wp-components-color-accent-darker-10, var(--wp-admin-theme-color-darker-10, #2145e6));
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=index.css.map*/

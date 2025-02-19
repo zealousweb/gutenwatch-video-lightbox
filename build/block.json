@@ -1,15 +1,116 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 2,
-  "name": "zwt-gvl-blocks/gutenwatch-video-lightbox",
-  "version": "1.0",
-  "title": "Gutenwatch Video Lightbox",
-  "category": "zwt-blocks",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
-  "example": {},
-  "supports": {
-    "html": true
+  "name": "video-lightbox-for-guten-blocks/videolightbox",
+  "version": "1.0.0",
+  "title": "Video Lightbox",
+  "category": "zealblocks",
+  "icon": "video-alt3",
+  "description": "Enhance your WordPress website with the Video Lightbox for Gutenberg Blocks plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.",
+  "attributes": {
+    "blockClass": {
+      "type": "string",
+      "default": ""
+    },
+    "image": {
+      "type": "object",
+      "default": null
+    },
+    "selection": {
+      "type": "string",
+      "default": "button"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Play Video"
+    },
+    "buttonBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonBorderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonBackgroundHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonBorderHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonBorderWidth": {
+      "type": "number",
+      "default": 0
+    },
+    "imageSize": {
+      "type": "string",
+      "default": "full"
+    },
+    "playIconEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "playIconImage": {
+      "type": "string",
+      "default": null
+    },
+    "playIconImageSize": {
+      "type": "number",
+      "default": 30
+    },
+    "videoLightboxColor": {
+      "type": "string",
+      "default": ""
+    },
+    "videoLightboxOpacity": {
+      "type": "number",
+      "default": 0.8
+    },
+    "videoLightboxWidth": {
+      "type": "number",
+      "default": 640
+    },
+    "videoType": {
+      "type": "string",
+      "default": null
+    },
+    "selectedSize": {
+      "type": "string",
+      "default": "thumbnail"
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": null
+    },
+    "video": {
+      "type": "string",
+      "default": null
+    },
+    "buttonBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "videoThumbnailBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "text_color": {
+      "type": "string",
+      "default": null
+    }
   },
-  "textdomain": "gutenwatch-video-lightbox"
+  "textdomain": "video-lightbox-for-guten-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
 }

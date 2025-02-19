@@ -1,4 +1,4 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 var __webpack_exports__ = {};
 /*!*********************!*\
   !*** ./src/view.js ***!
@@ -26,8 +26,58 @@ var __webpack_exports__ = {};
  */
 
 /* eslint-disable no-console */
-console.log('Hello World! (from create-block-gutenwatch-video-lightbox block)');
+var $ = jQuery.noConflict();
+
+/** Script on ready start
+------------------------------------------------------------------------------*/
+$(() => {
+  jQuery("[data-fancybox]").each(function () {
+    $this = jQuery(this);
+    $datafancyclass = jQuery(this).attr('data-fancy-class');
+    console.log('data' + $datafancyclass);
+    Fancybox.bind('[data-fancybox="' + $datafancyclass + '"]', {
+      mainClass: `zwt-vlfgb-fancy ` + $datafancyclass + '-fancy-custom'
+    });
+    // jQuery(".vl-button ." + $datafancyclass).fancybox({
+    //     mainClass: $datafancyclass + '-fancy-custom'
+    //     // Add other options as needed
+    // });
+    // Fancybox.bind(['data-fancybox="zwt-vlfgb-' + $datafancyclass + '"'] , {
+    //     mainClass: `zwt-vlfgb-fancy ` + $datafancyclass + '-fancy-custom',
+    // });
+    // var galleryId = $(this).data("fancybox");
+    // $(this).find("a").attr("data-fancybox", galleryId);
+  });
+
+  // $(document).on('click', '.vl-button', function(){
+  //
+  // });
+
+  /** Fancybox bindings for Media Grid */
+  // Fancybox.bind('[data-fancybox]', {
+  // mainClass: `zwt-vlfgb-fancy`,
+  // });
+});
 /* eslint-enable no-console */
+
+// $(window).on('load', () => {
+//     // Your code here
+//     $("[data-fancybox]").each(function () {
+//         $this = $(this);
+//         $datafancyclass = $(this).attr('data-fancy-class');
+//         console.log($datafancyclass);
+//         $(".vl-button ." + $datafancyclass).fancybox({
+//             mainClass: $datafancyclass + '-fancy-custom'
+//             // Add other options as needed
+//         });
+//         // Fancybox.bind(['data-fancybox="video-lightbox-' + $datafancyclass + '"'] , {
+//         //     mainClass: `video-lightbox-fancy ` + $datafancyclass + '-fancy-custom',
+//         // });
+//         // var galleryId = $(this).data("fancybox");
+//         // $(this).find("a").attr("data-fancybox", galleryId);
+//     });
+//     console.log('Page and all resources are loaded');
+// });
 /******/ })()
 ;
 //# sourceMappingURL=view.js.map
