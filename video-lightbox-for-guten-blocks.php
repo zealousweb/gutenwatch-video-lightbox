@@ -4,7 +4,7 @@
  * Description:       Enhance your WordPress website with the "Video Lightbox for Gutenberg Blocks" plugin, a powerful tool that seamlessly integrates into the Gutenberg editor to bring a captivating multimedia experience to your content.
  * Requires at least: 5.9
  * Requires PHP:      7.4
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            ZealousWeb
  * Author URI: https://www.zealousweb.com
  * License:           GNU General Public License v3.0 or later
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if (!defined('ZWT_VLFGB_VERSION')) {
-    define('ZWT_VLFGB_VERSION', '1.0.2');
+    define('ZWT_VLFGB_VERSION', '1.0.3');
 }
 
 
