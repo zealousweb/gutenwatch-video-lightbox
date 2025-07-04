@@ -5,8 +5,8 @@ Donate link: http://www.zealousweb.com/payment/
 Requires at least: 5.9
 Tested up to: 6.8
 Requires PHP: 7.4
-Version: 1.0.3
-Stable tag: 1.0.3
+Version: 1.0.4
+Stable tag: 1.0.4
 License: GNU General Public License v3.0 or later
 License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
 
@@ -105,6 +105,9 @@ This plugin utilizes third-party libraries to enhance its functionality:
 
 
 == Changelog ==
+
+= 1.0.4 =
+Bug resolved: Fixed the issue related.
 
 = 1.0.3 =
 Minor changes - Doc update
