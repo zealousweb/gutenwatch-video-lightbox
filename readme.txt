@@ -107,7 +107,7 @@ This plugin utilizes third-party libraries to enhance its functionality:
 == Changelog ==
 
 = 1.0.5 =
-Tested with the latest version of WordPress (6.9).
+Added a new "Open Support Ticket" button to provide quick and direct access to support.
 
 = 1.0.4 =
 Bug resolved: Fixed the issue related.
