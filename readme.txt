@@ -3,7 +3,7 @@ Contributors:      zealopensource
 Tags:              Video Popup, Video Lightbox, Gutenberg
 Donate link: http://www.zealousweb.com/payment/
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
 Version: 1.0.5
 Stable tag: 1.0.5
