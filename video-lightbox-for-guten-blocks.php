@@ -27,6 +27,16 @@ if (!defined('ZWT_VLFGB_VERSION')) {
     define('ZWT_VLFGB_VERSION', '1.0.5');
 }
 
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'zwt_vlfgb_admin_plugin_links' );
+
+function zwt_vlfgb_admin_plugin_links( $links ) {
+
+	$support_link = '<a href="https://support.zealousweb.com/portal/en/home" target="_blank">' . esc_html__( 'Open Support Ticket', 'video-lightbox-for-guten-blocks' ) . '</a>';
+
+	$links[] = $support_link;
+
+	return $links;
+}
 
 /**
  * Register block assets.
